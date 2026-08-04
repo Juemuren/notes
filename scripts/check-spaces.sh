@@ -1,5 +1,8 @@
 #!/bin/sh
 
-fd -e md --search-path docs -X rg "[^\s|]  [^\s#|]"
+path=$1
+
+fd -e md --search-path "$path" -X \
+  rg "[^\s|]  [^\s#|]"
 
 exit 0

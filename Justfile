@@ -1,30 +1,27 @@
+NOTES_ROOT := 'src/content/docs'
+
 [default]
 default:
     @just --list
 
 check:
-    autocorrect docs --lint
-    rumdl check docs
+    rumdl check "{{ NOTES_ROOT }}"
 
 spell-check:
-    typos docs
-    cspell lint docs
+    typos "{{ NOTES_ROOT }}"
+    cspell lint "{{ NOTES_ROOT }}"
+
+punctuation-check:
+    autocorrect "{{ NOTES_ROOT }}" --lint
 
 ocd-check:
-    ./scripts/check-alerts.sh
-    ./scripts/check-emphasis.sh
-    ./scripts/check-links.sh
-    ./scripts/check-spaces.sh
+    ./scripts/check-callouts.sh "{{ NOTES_ROOT }}"
+    ./scripts/check-links.sh "{{ NOTES_ROOT }}"
+    ./scripts/check-spaces.sh "{{ NOTES_ROOT }}"
 
 lint-sh:
     shellcheck scripts/*.sh
 
 fmt-sh:
     fd -e sh -x \
-        shfmt --indent 4 --space-redirects --binary-next-line --write
-
-count sort="":
-    ./scripts/count-words.sh {{ sort }}
-
-timeline:
-    ./scripts/list-timeline.sh
+        shfmt --indent 2 --space-redirects --binary-next-line --write

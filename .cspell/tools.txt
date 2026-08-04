@@ -58,6 +58,7 @@ metasploit
 miktex
 miniforge
 miniserve
+mkdocs
 mmdc
 Motrix
 MSVC
@@ -126,6 +127,7 @@ weasyprint
 windbg
 winget
 wireshark
+withastro
 xelatex
 xmake
 xmlstarlet

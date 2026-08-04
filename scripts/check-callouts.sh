@@ -2,9 +2,10 @@
 
 set -e
 
+path=$1
+
 LETTERS="[A-Za-z]+"
 ALERTS="(tip|note|warning)"
-
 RULES=(
   "\[!$LETTERS\][-+]+"
   "\[!$LETTERS\]\s*$"
@@ -12,7 +13,7 @@ RULES=(
 )
 
 for pattern in "${RULES[@]}"; do
-  if rg -P --crlf "$pattern" content; then
+  if rg -P --crlf "$pattern" "$path"; then
     echo "[ERROR] $pattern"
     exit 1
   fi
