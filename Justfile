@@ -5,7 +5,7 @@ default:
     @just --list
 
 check:
-    rumdl check "{{ NOTES_ROOT }}"
+    rumdl check "{{ NOTES_ROOT }}" --no-cache
 
 spell-check:
     typos "{{ NOTES_ROOT }}"
