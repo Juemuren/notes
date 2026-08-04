@@ -33,7 +33,10 @@ Marp 支持自定义主题。如果不太熟悉 CSS，可以去社区下载别�
 
 ```json
 {
-  "markdown.marp.themes": ["./themes/marp/am_dark.scss", "./themes/marp/am_template.scss"]
+  "markdown.marp.themes": [
+    "./themes/marp/am_dark.scss",
+    "./themes/marp/am_template.scss"
+  ]
 }
 ```
 

@@ -32,20 +32,20 @@ React 还扩展了 _JavaScript_ 的语法，使得我们可以直接在 _JavaScr
 
 ```jsx
 // JSX 扩展语法
-const element = <div>JSX Example</div>
+const element = <div>JSX Example</div>;
 
 // 组件
 const App = () => {
-  const name = "React"
+  const name = "React";
   return (
     <div>
       <h1>Hello, {name}!</h1>
       {element}
     </div>
-  )
-}
+  );
+};
 
-createRoot(document.getElementById("root")).render(<App />)
+createRoot(document.getElementById("root")).render(<App />);
 ```
 
 ### 虚拟 DOM 和 Native

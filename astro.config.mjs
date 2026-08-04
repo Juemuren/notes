@@ -1,9 +1,9 @@
 // @ts-check
-import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import mermaid from "astro-mermaid";
+import { defineConfig } from "astro/config";
 
-import { jq, ignore } from "./src/syntaxes/index.mjs";
+import { ignore, jq } from "./src/syntaxes/index.mjs";
 
 // https://astro.build/config
 export default defineConfig({

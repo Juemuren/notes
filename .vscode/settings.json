@@ -7,7 +7,7 @@
     "**/.astro": true,
   },
   "explorer.fileNesting.patterns": {
-    ".markdownlint.yaml": ".autocorrectrc, .ltex.json, .typos.toml",
+    ".markdownlint.yaml": ".autocorrectrc, .ltex.json, .typos.toml, dprint.json",
     ".gitignore": ".git*",
     "package.json": "pnpm-*.yaml, .node-version",
   }

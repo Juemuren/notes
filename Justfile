@@ -4,8 +4,11 @@ NOTES_ROOT := 'src/content/docs'
 default:
     @just --list
 
-check:
+lint:
     rumdl check "{{ NOTES_ROOT }}" --no-cache
+
+format:
+    dprint fmt
 
 spell-check:
     typos "{{ NOTES_ROOT }}"

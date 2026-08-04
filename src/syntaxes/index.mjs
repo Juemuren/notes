@@ -9,5 +9,5 @@ function getGrammarJson(lang) {
   );
 }
 
-export const jq = getGrammarJson("jq")
+export const jq = getGrammarJson("jq");
 export const ignore = getGrammarJson("ignore");
