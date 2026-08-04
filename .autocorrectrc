@@ -18,5 +18,6 @@ context:
 textRules:
 fileTypes:
   md: markdown
+  mdx: markdown
 spellcheck:
   words:
