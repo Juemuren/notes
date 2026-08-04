@@ -1,29 +1,30 @@
 const CALLOUT_MARKER = /^\[!(note|tip|caution)\]/;
 
 function splitHeader(paragraph) {
-  const title = [];
-  const body = [];
-  let inBody = false;
+  const { children } = paragraph;
+  const separatorIndex = children.findIndex(
+    (child) => child.type === "text" && child.value.includes("\n"),
+  );
 
-  for (const child of paragraph.children) {
-    if (!inBody && child.type === "text") {
-      const newline = child.value.indexOf("\n");
-
-      if (newline !== -1) {
-        const titleText = child.value.slice(0, newline);
-        const bodyText = child.value.slice(newline + 1);
-
-        if (titleText) title.push({ ...child, value: titleText });
-        if (bodyText) body.push({ ...child, value: bodyText });
-        inBody = true;
-        continue;
-      }
-    }
-
-    (inBody ? body : title).push(child);
+  if (separatorIndex === -1) {
+    return { title: children, body: [] };
   }
 
-  return { title, body };
+  const separator = children[separatorIndex];
+  const newlineIndex = separator.value.indexOf("\n");
+  const titleText = separator.value.slice(0, newlineIndex);
+  const bodyText = separator.value.slice(newlineIndex + 1);
+
+  return {
+    title: [
+      ...children.slice(0, separatorIndex),
+      ...(titleText ? [{ ...separator, value: titleText }] : []),
+    ],
+    body: [
+      ...(bodyText ? [{ ...separator, value: bodyText }] : []),
+      ...children.slice(separatorIndex + 1),
+    ],
+  };
 }
 
 function toAside(blockquote) {
@@ -45,13 +46,9 @@ function toAside(blockquote) {
       data: { directiveLabel: true },
       children: title,
     },
+    ...(body.length > 0 ? [{ type: "paragraph", children: body }] : []),
+    ...blockquote.children.slice(1),
   ];
-
-  if (body.length > 0) {
-    children.push({ type: "paragraph", children: body });
-  }
-
-  children.push(...blockquote.children.slice(1));
 
   return {
     type: "containerDirective",

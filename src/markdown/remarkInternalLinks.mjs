@@ -23,9 +23,7 @@ function transformLinksInTree(node) {
 
   if (!Array.isArray(node.children)) return;
 
-  for (const child of node.children) {
-    transformLinksInTree(child);
-  }
+  node.children.forEach(transformLinksInTree);
 }
 
 export function remarkInternalLinks() {
