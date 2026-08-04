@@ -10,7 +10,7 @@ title: CUDA
 
 ### 获取工具链
 
-> [!warning] Windows 的先决条件
+> [!caution] Windows 的先决条件
 > 根据 [官方文档](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)，在 Windows 上必须得安装 Visual Studio，无法使用别的编译器。NVIDIA 似乎并没有支持 MinGW 的打算。
 
 首先你应该确认自己显卡驱动的版本。可以通过运行如下命令查看

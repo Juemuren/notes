@@ -69,7 +69,7 @@ scoop shim add vs 'path\to\vs\Common7\Tools\Launch-VsDevShell.ps1' '--' -Arch am
 
 #### 修改环境变量
 
-> [!warning] 环境冲突
+> [!caution] 环境冲突
 > 尽管 [官方文档](https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain) 这么干了，但我仍然认为修改 _PATH_ 变量可能不是最好的做法。
 >
 > 虽然这让我们能够不进入 MSYS 环境就使用编译器，但有潜在的环境的冲突的可能。最好还是 [进入编译环境](../环境管理器/MSYS.md#进入环境) 后再进行编译。不过这样配置任务会比较麻烦，你可能需要参考 [配置自定义任务指南](https://code.visualstudio.com/docs/debugtest/tasks#_custom-tasks)，或者不使用任务，而是在 VSCode 的集成终端里进入 MSYS 环境，然后手动执行命令。

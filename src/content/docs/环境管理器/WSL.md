@@ -58,7 +58,7 @@ wsl uname -a
 
 WSL 本质上是个虚拟机，而虚拟机的网络连接方式略微有点复杂，尤其是在宿主机使用了网络代理工具的情况下。
 
-> [!warning] Clash 的问题
+> [!caution] Clash 的问题
 > 在 WSL 里使用 Clash 这类本地代理软件，会遇到 `localhost` 域名映射的问题。解决方法主要有两种
 >
 > 1. 将网络模式设为 `Mirrored`。此时可能产生错误代码 `CreateInstance/CreateVm/ConfigureNetworking/0x8007054f`，在 [WSL issues#12351](https://github.com/microsoft/WSL/issues/12351) 上有很多人讨论这一问题
@@ -89,5 +89,5 @@ WSL 本质上是个虚拟机，而虚拟机的网络连接方式略微有点复�
 
 5. 在 Windows 文件系统中运行 Steamcommunity_302，然后 WSL 里就可以正常使用 Git 了
 
-> [!warning] Steamcommunity_302 的问题
+> [!caution] Steamcommunity_302 的问题
 > Steamcommunity_302 并没有开。如果介意，建议还是使用 Clash。

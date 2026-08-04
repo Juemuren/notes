@@ -97,7 +97,7 @@ jupyter nbconvert example.ipynb --to html --output export
 
 之后可以用浏览器的打印功能，将 `html` 文件转为 _PDF_。如果偏爱脚本也可以用 [无头浏览器](../网络/Chrome.md#无头模式) 来打印
 
-> [!warning] HTML 的排版缺陷
+> [!caution] HTML 的排版缺陷
 >
 > `lab` 模板的 HTML 在打印为 PDF 后，会截断非常长的代码行。
 >
@@ -131,7 +131,7 @@ $\LaTeX$ 内置的模板只有 `base`/`article`/`report`，可以自定义模板
 xelatex export.tex --quiet
 ```
 
-> [!warning] LaTeX 的一些问题
+> [!caution] LaTeX 的一些问题
 >
 > 原 `ipynb` 中引用的 _SVG_ 文件似乎没有被嵌入编译后的 _PDF_。目前我的做法就是手动将 _SVG_ 转为 _PNG_，而 `ipynb` 中只引用后者。
 

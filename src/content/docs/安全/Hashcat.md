@@ -48,7 +48,7 @@ c4d038b4bed09fdb1471ef51ec3a32cd:114514
 printf '114514' | md5sum
 ```
 
-> [!warning] echo 的坑
+> [!caution] echo 的坑
 >
 > 运行 `echo '114514' | md5sum` 得到的结果并不是 `c4d038b4bed09fdb1471ef51ec3a32cd`，因为 `echo` 会在末尾添加 `\n` 符号
 >

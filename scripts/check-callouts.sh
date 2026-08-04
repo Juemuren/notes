@@ -5,11 +5,11 @@ set -e
 path=$1
 
 LETTERS="[A-Za-z]+"
-ALERTS="(tip|note|warning)"
+CALLOUTS="(tip|note|caution)"
 RULES=(
   "\[!$LETTERS\][-+]+"
   "\[!$LETTERS\]\s*$"
-  "\[!(?!$ALERTS\])$LETTERS\]"
+  "\[!(?!$CALLOUTS\])$LETTERS\]"
 )
 
 for pattern in "${RULES[@]}"; do

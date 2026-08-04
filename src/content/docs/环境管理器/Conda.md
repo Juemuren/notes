@@ -53,7 +53,7 @@ conda init bash
 mamba shell init
 ```
 
-> [!warning] 启动速度
+> [!caution] 启动速度
 > 启用 Shell 集成后，Shell 的启动文件中会添加上一些命令。
 >
 > 如前所述，`conda` 由于使用 **Python** 实现，速度比较慢，执行这些命令要很长时间，会拖慢 Shell 的启动。我在自己的机器上测试，conda 集成后每次启动 Shell 大概要多花费 _2_ 秒左右；而 `mamba` 由于用 **C++** 实现，会快很多，大概只花了 _0.2_ 秒。因此 `conda` 和 `mamba` 二者只需集成一个，并且最好选择后者，这样能节省一点时间。

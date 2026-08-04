@@ -16,7 +16,7 @@ function rewriteInternalLink(url) {
   return route + suffix;
 }
 
-function rewriteLinksInTree(node) {
+function transformLinksInTree(node) {
   if (node.type === "link") {
     node.url = rewriteInternalLink(node.url);
   }
@@ -24,10 +24,10 @@ function rewriteLinksInTree(node) {
   if (!Array.isArray(node.children)) return;
 
   for (const child of node.children) {
-    rewriteLinksInTree(child);
+    transformLinksInTree(child);
   }
 }
 
 export function remarkInternalLinks() {
-  return rewriteLinksInTree;
+  return transformLinksInTree;
 }

@@ -142,7 +142,7 @@ pixi 还可以在一个项目中存在多个环境，参考 [官方文档 - 多�
 
 ### 全局工具
 
-> [!warning] 暂不支持 PyPI 包
+> [!caution] 暂不支持 PyPI 包
 >
 > 全局环境目前仅支持安装 Conda 包，对 PyPI 的支持进度可追踪 [pixi issues#2261](https://github.com/prefix-dev/pixi/issues/2261)
 >
