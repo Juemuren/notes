@@ -1,0 +1,13 @@
+Anson
+Catppuccin
+debugpy
+goroot
+Markmap
+Nsight
+Powerline
+rvben
+Tabliss
+Tampermonkey
+Tinymist
+Vimium
+Wappalyzer

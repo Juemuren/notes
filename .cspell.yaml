@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+language: en-us
+dictionaryDefinitions:
+  - name: note-words
+    path: ./.cspell/note-words.txt
+  - name: terms
+    path: ./.cspell/terms.txt
+  - name: tools
+    path: ./.cspell/tools.txt
+  - name: libs
+    path: ./.cspell/libs.txt
+  - name: extensions
+    path: ./.cspell/extensions.txt
+dictionaries:
+  - note-words
+  - terms
+  - tools
+  - libs
+  - extensions
+useGitignore: true
+ignorePaths:
+  - .cspell

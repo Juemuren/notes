@@ -1,0 +1,18 @@
+MD010:
+  enabled: true
+  ignore_code_languages:
+    - makefile
+    - txt
+    - ini
+MD013: false
+MD034: false
+MD049:
+  enabled: true
+  style: underscore
+MD057:
+  enabled: true
+  absolute_links: warn
+  compact_paths: true
+MD060:
+  enabled: true
+  style: aligned
