@@ -1,0 +1,12 @@
+<div class="resource-grid">
+  <slot />
+</div>
+
+<style>
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(9rem, 100%), 11rem));
+    gap: 1.5rem 1.1rem;
+    margin-block: 1rem 2rem;
+  }
+</style>
