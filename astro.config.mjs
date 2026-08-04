@@ -4,7 +4,8 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://juemuren.github.io/notes/',
+  site: 'https://juemuren.github.io',
+  base: 'notes',
   integrations: [
     starlight({
       title: "笔记",
