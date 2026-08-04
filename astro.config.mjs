@@ -8,6 +8,12 @@ export default defineConfig({
   base: 'notes',
   integrations: [
     starlight({
+      locales: {
+        root: {
+          label: '简体中文',
+          lang: 'zh-CN',
+        },
+      },
       title: "笔记",
       social: [
         {
