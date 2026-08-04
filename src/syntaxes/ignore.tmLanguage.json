@@ -1,0 +1,73 @@
+{
+  "name": "ignore",
+  "scopeName": "source.ignore",
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#constant"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#punctuation"
+    },
+    {
+      "include": "#variable"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.ignore",
+      "begin": "#+\\s?",
+      "end": "$",
+      "patterns": []
+    },
+    "constant": {
+      "patterns": [
+        {
+          "name": "constant.character.escape",
+          "match": "\\\\[#*!? ]"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.glob.ignore",
+          "match": "(\\*{2})"
+        },
+        {
+          "name": "keyword.control.wildcard.ignore",
+          "match": "((\\?|\\*){1})"
+        },
+        {
+          "name": "keyword.control.negation.ignore",
+          "match": "([!])"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.definition.variable.begin.ignore",
+          "match": "(\\[)"
+        },
+        {
+          "name": "punctuation.definition.variable.end.ignore",
+          "match": "(])"
+        }
+      ]
+    },
+    "variable": {
+      "patterns": [
+        {
+          "name": "variable.other.range",
+          "match": "(?<=\\[)([a-zA-Z0-9.\\-_]+)(?=\\])"
+        }
+      ]
+    }
+  }
+}

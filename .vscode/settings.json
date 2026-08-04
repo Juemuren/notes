@@ -9,5 +9,6 @@
   "explorer.fileNesting.patterns": {
     ".markdownlint.yaml": ".autocorrectrc, .cspell.yaml, .ltex.json, .typos.toml",
     ".gitignore": ".git*",
+    "package.json": "pnpm-*.yaml, .node-version",
   }
 }
