@@ -124,13 +124,17 @@ zprofile = { target = "~/.zshrc", type = "template" }
 # windows.toml
 [windows.variables]
 scoop_root = "~/scoop"
+```
 
+变量也可以被覆盖
+
+```toml
 # local.toml
 [variables]
 scoop_root = "E:/Program/Scoop"
 ```
 
-变量可以被覆盖。关于包及其覆盖规则参见后面的 [文件和包](#文件和包) 这部分
+关于包及其覆盖规则参见后面的 [文件和包](#文件和包) 这部分
 
 #### 文件和包
 

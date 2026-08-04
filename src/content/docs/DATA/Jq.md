@@ -119,7 +119,9 @@ update_description |
 jq -f both.jq my-243-2-normal.json > my-243-2-both.json
 ```
 
-可以借助模块来提高代码的复用性
+可以借助模块来提高代码的复用性。
+
+首先选择一个库文件用于定义函数
 
 ```jq
 # utils.jq
@@ -132,7 +134,11 @@ def update_manufacture($index; $operators):
 
 def update_trading($index):
   .rooms.trading[$index].product = "Orundum";
+```
 
+之后别的文件可以通过 `include` 来使用这些函数
+
+```jq
 # both.jq
 include "utils";
 
@@ -144,32 +150,6 @@ update_description("搓玉/卖玉") |
     update_trading(0)
   elif .name == "晚班" then
     update_manufacture(0; ["火神", "泡泡", "褐果"]) |
-    update_trading(0)
-  end
-)
-
-# make.jq
-include "utils";
-
-update_description("搓玉/不卖玉") |
-.plans |= map(
-  update_description("搓玉/不卖玉") |
-  if .name == "早班" then
-    update_manufacture(0; ["艾雅法拉", "地灵", "炎熔"])
-  elif .name == "晚班" then
-    update_manufacture(0; ["火神", "泡泡", "褐果"])
-  end
-)
-
-# sale.jq
-include "utils";
-
-update_description("不搓玉/卖玉") |
-.plans |= map(
-  update_description("不搓玉/卖玉") |
-  if .name == "早班" then
-    update_trading(0)
-  elif .name == "晚班" then
     update_trading(0)
   end
 )
