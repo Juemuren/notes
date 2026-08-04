@@ -1,25 +1,27 @@
-NOTES_ROOT := 'src/content/docs'
+SOURCE := 'src/content/docs'
+TARGET := 'dist'
 
 [default]
 default:
     @just --list
 
 lint:
-    rumdl check "{{ NOTES_ROOT }}" --no-cache
+    rumdl check "{{ SOURCE }}" --no-cache
 
 format:
     dprint fmt
 
 spell-check:
-    typos "{{ NOTES_ROOT }}"
+    typos "{{ SOURCE }}"
 
 punctuation-check:
-    autocorrect "{{ NOTES_ROOT }}" --lint
+    autocorrect "{{ SOURCE }}" --lint
 
 ocd-check:
-    ./scripts/check-callouts.sh "{{ NOTES_ROOT }}"
-    ./scripts/check-links.sh "{{ NOTES_ROOT }}"
-    ./scripts/check-spaces.sh "{{ NOTES_ROOT }}"
+    ./scripts/check-callouts.sh "{{ SOURCE }}"
+    ./scripts/check-links.sh "{{ SOURCE }}"
+    ./scripts/check-spaces.sh "{{ SOURCE }}"
+    ./scripts/check-emphasis.sh "{{ TARGET }}"
 
 lint-sh:
     shellcheck scripts/*.sh

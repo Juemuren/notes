@@ -13,7 +13,7 @@ RULES=(
 )
 
 for pattern in "${RULES[@]}"; do
-  if rg -P --crlf "$pattern" "$path"; then
+  if rg -P "$pattern" "$path"; then
     echo "[ERROR] $pattern"
     exit 1
   fi
