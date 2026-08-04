@@ -9,7 +9,6 @@ check:
 
 spell-check:
     typos "{{ NOTES_ROOT }}"
-    cspell lint "{{ NOTES_ROOT }}"
 
 punctuation-check:
     autocorrect "{{ NOTES_ROOT }}" --lint
