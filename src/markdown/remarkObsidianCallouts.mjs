@@ -2,32 +2,29 @@ const CALLOUT_MARKER = /^\[!(note|tip|caution)\]/;
 
 function splitHeader(paragraph) {
   const { children } = paragraph;
-  const separatorIndex = children.findIndex(
+  const lineBreakIndex = children.findIndex(
     (child) => child.type === "text" && child.value.includes("\n"),
   );
 
-  if (separatorIndex === -1) {
+  if (lineBreakIndex === -1) {
     return { title: children, body: [] };
   }
 
-  const separator = children[separatorIndex];
-  const newlineIndex = separator.value.indexOf("\n");
-  const titleText = separator.value.slice(0, newlineIndex);
-  const bodyText = separator.value.slice(newlineIndex + 1);
+  const lineBreak = children[lineBreakIndex];
+  const newlineIndex = lineBreak.value.indexOf("\n");
+  const title = children.slice(0, lineBreakIndex);
+  const body = children.slice(lineBreakIndex + 1);
 
-  return {
-    title: [
-      ...children.slice(0, separatorIndex),
-      ...(titleText ? [{ ...separator, value: titleText }] : []),
-    ],
-    body: [
-      ...(bodyText ? [{ ...separator, value: bodyText }] : []),
-      ...children.slice(separatorIndex + 1),
-    ],
-  };
+  const titleText = lineBreak.value.slice(0, newlineIndex);
+  if (titleText) title.push({ ...lineBreak, value: titleText });
+
+  const bodyText = lineBreak.value.slice(newlineIndex + 1);
+  if (bodyText) body.unshift({ ...lineBreak, value: bodyText });
+
+  return { title, body };
 }
 
-function toAside(blockquote) {
+function parseCallout(blockquote) {
   const header = blockquote.children[0];
   if (header?.type !== "paragraph") return;
 
@@ -39,37 +36,50 @@ function toAside(blockquote) {
 
   marker.value = marker.value.slice(match[0].length).trimStart();
 
-  const { title, body } = splitHeader(header);
-  const children = [
-    {
-      type: "paragraph",
-      data: { directiveLabel: true },
-      children: title,
-    },
-    ...(body.length > 0 ? [{ type: "paragraph", children: body }] : []),
-    ...blockquote.children.slice(1),
-  ];
+  return {
+    name: match[1],
+    header,
+    content: blockquote.children.slice(1),
+  };
+}
+
+function transformCallout(blockquote) {
+  const callout = parseCallout(blockquote);
+  if (!callout) return;
+
+  const { title, body } = splitHeader(callout.header);
+  const label = {
+    type: "paragraph",
+    data: { directiveLabel: true },
+    children: title,
+  };
+  const children = [label];
+
+  if (body.length > 0) children.push({ type: "paragraph", children: body });
+  children.push(...callout.content);
 
   return {
     type: "containerDirective",
-    name: match[1],
+    name: callout.name,
     attributes: {},
     children,
   };
 }
 
-function transformCalloutsInTree(node) {
+function transformCallouts(node) {
   if (Array.isArray(node.children)) {
-    node.children = node.children.map(transformCalloutsInTree);
+    node.children = node.children.map(transformCallouts);
   }
 
   if (node.type === "blockquote") {
-    return toAside(node) ?? node;
+    return transformCallout(node) ?? node;
   }
 
   return node;
 }
 
 export function remarkObsidianCallouts() {
-  return transformCalloutsInTree;
+  return (tree) => {
+    transformCallouts(tree);
+  };
 }

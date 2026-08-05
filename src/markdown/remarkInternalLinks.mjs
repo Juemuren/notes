@@ -36,17 +36,25 @@ function rewriteInternalLink(url, indexPage) {
   return markdownPathToRoute(pathname, indexPage) + suffix;
 }
 
-function rewriteLinks(node, rewriteUrl) {
-  if (node.type === "link") {
-    node.url = rewriteUrl(node.url);
+function transformLink(link, indexPage) {
+  link.url = rewriteInternalLink(link.url, indexPage);
+  return link;
+}
+
+function transformLinks(node, indexPage) {
+  if (Array.isArray(node.children)) {
+    node.children = node.children.map((child) => transformLinks(child, indexPage));
   }
 
-  node.children?.forEach((child) => rewriteLinks(child, rewriteUrl));
+  if (node.type === "link") {
+    return transformLink(node, indexPage);
+  }
+
+  return node;
 }
 
 export function remarkInternalLinks() {
   return (tree, file) => {
-    const indexPage = isIndexPage(file);
-    rewriteLinks(tree, (url) => rewriteInternalLink(url, indexPage));
+    transformLinks(tree, isIndexPage(file));
   };
 }
