@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
-export const GET = (async ({ site }) => {
-  const base = new URL(import.meta.env.BASE_URL, site);
+export const GET = (async ({ url }) => {
+  const base = new URL("./", url);
   const entries = await getCollection("docs");
 
   return new Response(
