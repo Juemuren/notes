@@ -1,0 +1,134 @@
+---
+title: 原理
+---
+
+import BookCard from "../../../components/BookCard.astro";
+import ResourceGrid from "../../../components/ResourceGrid.astro";
+import VideoCard from "../../../components/VideoCard.astro";
+
+## 入门
+
+### 计算机科学导论
+
+**依赖：** 无
+
+<ResourceGrid>
+  <VideoCard title="计算机科学速成课" url="https://www.bilibili.com/video/BV1EW411u7th/" />
+  <BookCard title="编码" url="https://book.douban.com/subject/4822685/" />
+</ResourceGrid>
+
+### 逻辑设计
+
+**弱依赖：** [离散数学](数学.mdx#离散数学)
+
+<ResourceGrid>
+  <BookCard title="数字逻辑基础与Verilog设计" url="https://book.douban.com/subject/2308122/" />
+</ResourceGrid>
+
+### 深度学习
+
+**弱依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[面向过程编程](编程.mdx#面向过程编程)
+
+<ResourceGrid>
+  <BookCard title="深度学习入门" url="https://book.douban.com/subject/30270959/" />
+</ResourceGrid>
+
+## 衔接
+
+### 计算机组成
+
+**强依赖：** [面向过程编程](编程.mdx#面向过程编程)、[面向对象编程](编程.mdx#面向对象编程)
+
+**弱依赖：** [离散数学](数学.mdx#离散数学)、[计算机科学导论](#计算机科学导论)、[逻辑设计](#逻辑设计)
+
+<ResourceGrid>
+  <BookCard title="计算机系统要素" url="https://book.douban.com/subject/1998341/" />
+</ResourceGrid>
+
+### 计算机系统
+
+**强依赖：** [面向过程编程](编程.mdx#面向过程编程)、[开发工具](编程.mdx#开发工具)
+
+**弱依赖：** [计算机科学导论](#计算机科学导论)、[计算机组成](#计算机组成)
+
+<ResourceGrid>
+  <BookCard title="深入理解计算机系统" url="https://book.douban.com/subject/26912767/" />
+</ResourceGrid>
+
+### 计算机网络
+
+**强依赖：** [面向过程编程](编程.mdx#面向过程编程)
+
+**弱依赖：** [微积分](数学.mdx#微积分)、[离散数学](数学.mdx#离散数学)
+
+<ResourceGrid>
+  <BookCard title="计算机网络" url="https://book.douban.com/subject/30280001/" />
+</ResourceGrid>
+
+### 数据库系统
+
+**强依赖：** [离散数学](数学.mdx#离散数学)、[面向过程编程](编程.mdx#面向过程编程)、[面向对象编程](编程.mdx#面向对象编程)
+
+**弱依赖：** [数据结构与算法](编程.mdx#数据结构与算法)、[计算机系统](#计算机系统)
+
+<ResourceGrid>
+  <BookCard title="数据库系统概念" url="https://book.douban.com/subject/35501216/" />
+</ResourceGrid>
+
+### 人工智能
+
+**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[离散数学](数学.mdx#离散数学)、[面向过程编程](编程.mdx#面向过程编程)
+
+**弱依赖：** [概率论](数学.mdx#概率论)、[数据结构与算法](编程.mdx#数据结构与算法)
+
+<ResourceGrid>
+  <BookCard title="人工智能" url="https://book.douban.com/subject/36152133/" />
+</ResourceGrid>
+
+## 专业
+
+### 计算机图形学
+
+**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[面向对象编程](编程.mdx#面向对象编程)
+
+**弱依赖：** [信号与系统](数学.mdx#信号与系统)、[数值分析](数学.mdx#数值分析)
+
+<ResourceGrid>
+  <BookCard title="计算机图形学" url="https://book.douban.com/subject/2116178/" />
+</ResourceGrid>
+
+### 体系结构
+
+**强依赖：** [计算机系统](#计算机系统)
+
+<ResourceGrid>
+  <BookCard title="计算机体系结构" url="https://book.douban.com/subject/36108789/" />
+</ResourceGrid>
+
+### 编译原理
+
+**强依赖：** [面向过程编程](编程.mdx#面向过程编程)、[离散数学](数学.mdx#离散数学)、[数据结构与算法](编程.mdx#数据结构与算法)
+
+**弱依赖：** [编程语言](编程.mdx#编程语言)
+
+<ResourceGrid>
+  <BookCard title="编译原理" url="https://book.douban.com/subject/3296317/" />
+</ResourceGrid>
+
+### 操作系统
+
+**强依赖：** [面向过程编程](编程.mdx#面向过程编程)、[数据结构与算法](编程.mdx#数据结构与算法)、[计算机系统](#计算机系统)
+
+<ResourceGrid>
+  <BookCard title="操作系统导论" url="https://book.douban.com/subject/33463930/" />
+</ResourceGrid>
+
+### 机器学习
+
+**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[概率论](数学.mdx#概率论)、[面向过程编程](编程.mdx#面向过程编程)、[面向对象编程](编程.mdx#面向对象编程)
+
+**弱依赖：** [凸优化](数学.mdx#凸优化)、[信息论](数学.mdx#信息论)
+
+<ResourceGrid>
+  <BookCard title="机器学习实战" url="https://book.douban.com/subject/35218199/" />
+</ResourceGrid>
