@@ -8,82 +8,102 @@ import WebCard from "../../../components/WebCard.astro";
 
 ## 入门
 
-### 面向过程编程
-
-**依赖：** 无
+### 编程基础
 
 <ResourceGrid>
-  <BookCard title="C Primer Plus" url="https://book.douban.com/subject/26792521/" />
-  <BookCard title="C程序设计语言" url="https://book.douban.com/subject/1139336/" />
-  <WebCard title="C参考手册" url="https://cppreference.cn/w/c" />
+  <WebCard title="CS50x" url="https://cs50.harvard.edu/x/" />
+  <WebCard title="C 参考手册" url="https://en.cppreference.com/c/" />
+  <WebCard title="Python 参考手册" url="https://docs.python.org/" />
 </ResourceGrid>
 
-### 面向对象编程
+本课程以哈佛大学的 CS50x 作为基础，从 C 开始学习，然后过渡到 Python，最后接触了一点 SQL 和 Web。
 
-**弱依赖：** [面向过程编程](#面向过程编程)
-
-<ResourceGrid>
-  <BookCard title="C++ Primer" url="https://book.douban.com/subject/25708312/" />
-  <WebCard title="C++参考手册" url="https://cppreference.cn/w/cpp" />
-</ResourceGrid>
+学习本课程是为了解编程的基本概念，不要纠结于语法细节和各种标准库函数如何使用——这些直接查询文档即可。
 
 ### 开发工具
 
 **弱依赖：** [计算机科学导论](原理.mdx#计算机科学导论)
 
 <ResourceGrid>
-  <WebCard title="计算机教育中缺失的一课" url="https://missing-semester-cn.github.io/" />
+  <WebCard
+    title="计算机教育中缺失的一课"
+    url="https://missing-semester-cn.github.io/"
+  />
 </ResourceGrid>
 
 ## 衔接
 
-### 编程语言
+### 面向对象编程
 
-**强依赖：** [面向过程编程](#面向过程编程)
+**强依赖：** [编程基础](#编程基础)
+
+<ResourceGrid>
+  <BookCard
+    title="C++ Primer"
+    url="https://book.douban.com/subject/25708312/"
+  />
+  <WebCard title="C++ 参考手册" url="https://en.cppreference.com/cpp/" />
+</ResourceGrid>
+
+### 函数式编程
+
+**强依赖：** [编程基础](#编程基础)
 
 **弱依赖：** [离散数学](数学.mdx#离散数学)
 
 <ResourceGrid>
-  <BookCard title="计算机程序的构造和解释" url="https://book.douban.com/subject/1148282/" />
+  <BookCard
+    title="计算机程序的构造和解释"
+    url="https://book.douban.com/subject/1148282/"
+  />
+  <WebCard title="Scheme 参考手册" url="https://man.scheme.org/" />
 </ResourceGrid>
 
 ### 数据结构与算法
 
-**强依赖：** [面向过程编程](#面向过程编程)、[离散数学](数学.mdx#离散数学)
+**强依赖：** [编程基础](#编程基础)、[离散数学](数学.mdx#离散数学)
+**弱依赖：** [函数式编程](#函数式编程)
 
 <ResourceGrid>
-  <BookCard title="数据结构与算法分析" url="https://book.douban.com/subject/1139426/" />
+  <BookCard
+    title="数据结构与算法分析"
+    url="https://book.douban.com/subject/1139426/"
+  />
   <BookCard title="算法导论" url="https://book.douban.com/subject/20432061/" />
 </ResourceGrid>
 
 ### 设计模式
 
-**强依赖：** [面向过程编程](#面向过程编程)、[面向对象编程](#面向对象编程)
+**强依赖：** [编程基础](#编程基础)
+**弱依赖：** [面向对象编程](#面向对象编程)
 
 <ResourceGrid>
   <BookCard title="设计模式" url="https://book.douban.com/subject/34262305/" />
 </ResourceGrid>
 
+## 专业
+
 ### 软件工程
 
-**强依赖：** [面向过程编程](#面向过程编程)、[面向对象编程](#面向对象编程)、[开发工具](#开发工具)
+**强依赖：** [编程基础](#编程基础)、[开发工具](#开发工具)、[面向对象编程](#面向对象编程)、[函数式编程](#函数式编程)
 
-**弱依赖：** [数据结构与算法](#数据结构与算法)、[编程语言](#编程语言)、[设计模式](#设计模式)
+**弱依赖：** [数据结构与算法](#数据结构与算法)、[设计模式](#设计模式)
 
 <ResourceGrid>
   <BookCard title="代码大全" url="https://book.douban.com/subject/1477390/" />
 </ResourceGrid>
 
-## 专业
-
 ### 游戏开发
 
-**强依赖：** [线性代数](数学.mdx#线性代数)、[面向过程编程](#面向过程编程)、[面向对象编程](#面向对象编程)、[开发工具](#开发工具)
+**强依赖：** [线性代数](数学.mdx#线性代数)、[编程基础](#编程基础)、[面向对象编程](#面向对象编程)、[开发工具](#开发工具)
 
 **弱依赖：** [信号与系统](数学.mdx#信号与系统)、[数值分析](数学.mdx#数值分析)、[设计模式](#设计模式)、[软件工程](#软件工程)、[计算机系统](原理.mdx#计算机系统)、[计算机图形学](原理.mdx#计算机图形学)
 
 <ResourceGrid>
-  <BookCard title="游戏引擎架构" url="https://book.douban.com/subject/34864920/" />
+  <BookCard
+    title="游戏引擎架构"
+    url="https://book.douban.com/subject/34864920/"
+  />
 </ResourceGrid>
 
 ### 网站开发
@@ -93,21 +113,28 @@ import WebCard from "../../../components/WebCard.astro";
 **弱依赖：** [计算机图形学](原理.mdx#计算机图形学)
 
 <ResourceGrid>
-  <WebCard title="深入浅出现代Web编程" url="https://fullstackopen.com/zh/" />
+  <WebCard title="深入浅出现代 Web 编程" url="https://fullstackopen.com/en/" />
+  <WebCard title="Web 参考手册" url="https://developer.mozilla.org/en-US/" />
 </ResourceGrid>
 
 ### 系统编程
 
-**强依赖：** [面向过程编程](#面向过程编程)、[计算机系统](原理.mdx#计算机系统)
+**强依赖：** [编程基础](#编程基础)、[计算机系统](原理.mdx#计算机系统)
 
 <ResourceGrid>
-  <BookCard title="UNIX环境高级编程" url="https://book.douban.com/subject/25900403/" />
+  <BookCard
+    title="UNIX 环境高级编程"
+    url="https://book.douban.com/subject/25900403/"
+  />
 </ResourceGrid>
 
 ### 网络编程
 
-**强依赖：** [面向过程编程](#面向过程编程)、[计算机网络](原理.mdx#计算机网络)
+**强依赖：** [编程基础](#编程基础)、[计算机网络](原理.mdx#计算机网络)
 
 <ResourceGrid>
-  <BookCard title="UNIX网络编程卷1" url="https://book.douban.com/subject/26434583/" />
+  <BookCard
+    title="UNIX 网络编程卷1"
+    url="https://book.douban.com/subject/26434583/"
+  />
 </ResourceGrid>
