@@ -2,6 +2,7 @@
 import starlight from "@astrojs/starlight";
 import mermaid from "astro-mermaid";
 import { defineConfig } from "astro/config";
+import { starlightKatex } from "starlight-katex";
 
 import { markdownProcessor } from "./src/markdown/index.mjs";
 import { ignore, jq } from "./src/syntaxes/index.mjs";
@@ -16,6 +17,7 @@ export default defineConfig({
   integrations: [
     mermaid(),
     starlight({
+      plugins: [starlightKatex()],
       expressiveCode: {
         shiki: {
           langs: [jq, ignore],
