@@ -3,60 +3,44 @@ title: 选学
 ---
 
 import BookCard from "../../../components/BookCard.astro";
+import CourseDependencies from "../../../components/CourseDependencies.astro";
 import ResourceGrid from "../../../components/ResourceGrid.astro";
 
-## 工科
+## 电气工程
 
 ### 电子电路
 
-**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)
-
-**弱依赖：** [信号与系统](数学.mdx#信号与系统)
+<CourseDependencies
+  strong={["微积分", "线性代数"]}
+  weak={["信号与系统"]}
+/>
 
 <ResourceGrid>
   <BookCard title="模拟与数字电子电路基础" url="https://book.douban.com/subject/3171563/" />
 </ResourceGrid>
 
-### 控制理论
-
-**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[信号与系统](数学.mdx#信号与系统)、[微分方程](#微分方程)
-
-<ResourceGrid>
-  <BookCard title="现代控制系统" url="https://book.douban.com/subject/26413087/" />
-</ResourceGrid>
-
-## 理科
-
-### 微分方程
-
-**强依赖：** [微积分](数学.mdx#微积分)
-
-**弱依赖：** [线性代数](数学.mdx#线性代数)
-
-<ResourceGrid>
-  <BookCard title="微分方程" url="https://book.douban.com/subject/4068358/" />
-</ResourceGrid>
-
-《微分方程》这本书的中文版已经停止出版了，但我认为内容相当不错。
-
-本书介绍了常微分方程的主要理论，且少数例子涉及到偏微分方程。另外，本书对变分法的介绍非常好。
-
-本书只在最后一章讨论了解的存在及唯一性，其余部分都更偏重于计算而不是详细的证明。
+## 纯粹数学
 
 ### 实分析
 
-**强依赖：** [微积分](数学.mdx#微积分)
+<CourseDependencies strong={["微积分"]} />
 
 <ResourceGrid>
   <BookCard title="陶哲轩实分析" url="https://book.douban.com/subject/30227556/" />
 </ResourceGrid>
 
+{/* TODO ### 复分析 */}
+
+{/* TODO ### 泛函分析 */}
+
 ### 抽象代数
 
-**强依赖：** [离散数学](数学.mdx#离散数学)
-
-**弱依赖：** [线性代数](数学.mdx#线性代数)
+<CourseDependencies strong={["离散数学"]} weak={["线性代数"]} />
 
 <ResourceGrid>
   <BookCard title="高等近世代数" url="https://book.douban.com/subject/1953795/" />
 </ResourceGrid>
+
+{/* TODO ### 微分几何 */}
+
+{/* TODO ### 拓扑学 */}

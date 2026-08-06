@@ -1,0 +1,115 @@
+---
+import { coursePaths, type CourseName } from "../config/coursePaths";
+
+interface Props {
+  strong?: readonly CourseName[];
+  weak?: readonly CourseName[];
+}
+
+const { strong = [], weak = [] } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const groups = [
+  { label: "强依赖", kind: "strong", courses: strong },
+  { label: "弱依赖", kind: "weak", courses: weak },
+].filter(({ courses }) => courses.length > 0);
+---
+
+{
+  groups.length > 0 && (
+    <dl class="course-dependencies not-content">
+      {groups.map(({ label, kind, courses }) => (
+        <div class:list={["dependency-group", kind]}>
+          <dt>{label}</dt>
+          <dd>
+            <ul>
+              {courses.map((course) => (
+                <li>
+                  <a href={`${base}${coursePaths[course]}`}>{course}</a>
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  )
+}
+
+<style>
+  .course-dependencies {
+    display: grid;
+    gap: 0.55rem;
+    margin-block: 1rem;
+  }
+
+  .dependency-group {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+  }
+
+  dt {
+    flex: none;
+    padding: 0.12rem 0.48rem;
+    border: 1px solid var(--dependency-border);
+    color: var(--dependency-text);
+    background: var(--dependency-background);
+    border-radius: 0.35rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  dd {
+    min-width: 0;
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: var(--sl-color-text-accent);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  a:focus-visible {
+    border-radius: 0.15rem;
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 0.15rem;
+  }
+
+  .strong {
+    --dependency-border: var(--sl-color-red);
+    --dependency-text: var(--sl-color-red-high);
+    --dependency-background: var(--sl-color-red-low);
+  }
+
+  .weak {
+    --dependency-border: var(--sl-color-orange);
+    --dependency-text: var(--sl-color-orange-high);
+    --dependency-background: var(--sl-color-orange-low);
+  }
+
+  @media (max-width: 30rem) {
+    .dependency-group {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  }
+</style>

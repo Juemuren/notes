@@ -3,6 +3,7 @@ title: 原理
 ---
 
 import BookCard from "../../../components/BookCard.astro";
+import CourseDependencies from "../../../components/CourseDependencies.astro";
 import ResourceGrid from "../../../components/ResourceGrid.astro";
 import VideoCard from "../../../components/VideoCard.astro";
 
@@ -31,7 +32,7 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 逻辑设计
 
-**弱依赖：** [离散数学](数学.mdx#离散数学)、[微积分](数学.mdx#微积分)
+<CourseDependencies weak={["离散数学", "微积分"]} />
 
 <ResourceGrid>
   <BookCard
@@ -50,7 +51,7 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 深度学习
 
-**弱依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[编程基础](编程.mdx#编程基础)
+<CourseDependencies weak={["微积分", "线性代数", "编程基础"]} />
 
 <ResourceGrid>
   <BookCard
@@ -77,9 +78,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 计算机组成
 
-**强依赖：** [编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [离散数学](数学.mdx#离散数学)、[面向对象编程](编程.mdx#面向对象编程)、[计算机科学导论](#计算机科学导论)、[逻辑设计](#逻辑设计)
+<CourseDependencies
+  strong={["编程基础"]}
+  weak={["离散数学", "面向对象编程", "计算机科学导论", "逻辑设计"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -108,9 +110,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 计算机系统
 
-**强依赖：** [编程基础](编程.mdx#编程基础)、[开发工具](编程.mdx#开发工具)
-
-**弱依赖：** [计算机科学导论](#计算机科学导论)、[计算机组成](#计算机组成)
+<CourseDependencies
+  strong={["编程基础", "开发工具"]}
+  weak={["计算机科学导论", "逻辑设计", "计算机组成"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -127,9 +130,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 计算机网络
 
-**强依赖：** [编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [微积分](数学.mdx#微积分)、[离散数学](数学.mdx#离散数学)
+<CourseDependencies
+  strong={["编程基础"]}
+  weak={["微积分", "离散数学"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -153,9 +157,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 数据库系统
 
-**强依赖：** [离散数学](数学.mdx#离散数学)、[编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [数据结构与算法](编程.mdx#数据结构与算法)、[计算机系统](#计算机系统)
+<CourseDependencies
+  strong={["离散数学", "编程基础"]}
+  weak={["数据结构与算法", "计算机系统"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -175,9 +180,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 人工智能
 
-**强依赖：** [离散数学](数学.mdx#离散数学)、[编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[概率论](数学.mdx#概率论)、[数据结构与算法](编程.mdx#数据结构与算法)
+<CourseDependencies
+  strong={["离散数学", "编程基础"]}
+  weak={["微积分", "线性代数", "概率论", "数据结构与算法"]}
+/>
 
 <ResourceGrid>
   <BookCard title="人工智能" url="https://book.douban.com/subject/36152133/" />
@@ -193,9 +199,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 计算机图形学
 
-**强依赖：** [线性代数](数学.mdx#线性代数)、[编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [微积分](数学.mdx#微积分)、[面向对象编程](编程.mdx#面向对象编程)、[信号与系统](数学.mdx#信号与系统)、[数值分析](数学.mdx#数值分析)
+<CourseDependencies
+  strong={["线性代数", "编程基础"]}
+  weak={["微积分", "面向对象编程", "信号与系统", "数值分析"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -213,7 +220,7 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 体系结构
 
-**强依赖：** [计算机系统](#计算机系统)
+<CourseDependencies strong={["计算机系统"]} />
 
 <ResourceGrid>
   <BookCard
@@ -224,9 +231,10 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 编译原理
 
-**强依赖：** [编程基础](编程.mdx#编程基础)、[离散数学](数学.mdx#离散数学)、[数据结构与算法](编程.mdx#数据结构与算法)
-
-**弱依赖：** [函数式编程](编程.mdx#函数式编程)
+<CourseDependencies
+  strong={["编程基础", "离散数学", "数据结构与算法"]}
+  weak={["函数式编程"]}
+/>
 
 <ResourceGrid>
   <BookCard title="编译原理" url="https://book.douban.com/subject/3296317/" />
@@ -234,7 +242,7 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 操作系统
 
-**强依赖：** [编程基础](编程.mdx#编程基础)、[数据结构与算法](编程.mdx#数据结构与算法)、[计算机系统](#计算机系统)
+<CourseDependencies strong={["编程基础", "数据结构与算法", "计算机系统"]} />
 
 <ResourceGrid>
   <BookCard
@@ -243,11 +251,18 @@ import VideoCard from "../../../components/VideoCard.astro";
   />
 </ResourceGrid>
 
+{/* TODO ### 高性能计算 */}
+
+{/* TODO ### 分布式系统 */}
+
+{/* TODO ### 计算机安全 */}
+
 ### 机器学习
 
-**强依赖：** [微积分](数学.mdx#微积分)、[线性代数](数学.mdx#线性代数)、[概率论](数学.mdx#概率论)、[编程基础](编程.mdx#编程基础)
-
-**弱依赖：** [凸优化](数学.mdx#凸优化)、[信息论](数学.mdx#信息论)
+<CourseDependencies
+  strong={["微积分", "线性代数", "概率论", "编程基础"]}
+  weak={["凸优化", "信息论"]}
+/>
 
 <ResourceGrid>
   <BookCard

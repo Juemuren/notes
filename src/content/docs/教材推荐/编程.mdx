@@ -3,6 +3,7 @@ title: 编程
 ---
 
 import BookCard from "../../../components/BookCard.astro";
+import CourseDependencies from "../../../components/CourseDependencies.astro";
 import ResourceGrid from "../../../components/ResourceGrid.astro";
 import WebCard from "../../../components/WebCard.astro";
 
@@ -37,7 +38,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 ### 面向对象编程
 
-**弱依赖：** [编程基础](#编程基础)
+<CourseDependencies weak={["编程基础"]} />
 
 <ResourceGrid>
   <BookCard
@@ -69,7 +70,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 ### 函数式编程
 
-**弱依赖：** [编程基础](#编程基础)、[离散数学](数学.mdx#离散数学)
+<CourseDependencies weak={["编程基础", "离散数学"]} />
 
 <ResourceGrid>
   <BookCard
@@ -99,7 +100,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 ### 开发工具
 
-**弱依赖：** [编程基础](#编程基础)
+<CourseDependencies weak={["计算机科学导论", "编程基础"]} />
 
 <ResourceGrid>
   <WebCard
@@ -122,8 +123,10 @@ import WebCard from "../../../components/WebCard.astro";
 
 ### 数据结构与算法
 
-**强依赖：** [编程基础](#编程基础)、[离散数学](数学.mdx#离散数学)
-**弱依赖：** [函数式编程](#函数式编程)
+<CourseDependencies
+  strong={["编程基础", "离散数学"]}
+  weak={["函数式编程"]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -142,7 +145,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 ### 设计模式
 
-**强依赖：** [编程基础](#编程基础)、[面向对象编程](#面向对象编程)
+<CourseDependencies strong={["编程基础", "面向对象编程"]} />
 
 <ResourceGrid>
   <BookCard title="设计模式" url="https://book.douban.com/subject/34262305/" />
@@ -165,9 +168,10 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 ### 软件工程
 
-**强依赖：** [编程基础](#编程基础)、[开发工具](#开发工具)
-
-**弱依赖：** [面向对象编程](#面向对象编程)、[函数式编程](#函数式编程)、[数据结构与算法](#数据结构与算法)、[设计模式](#设计模式)
+<CourseDependencies
+  strong={["编程基础", "开发工具"]}
+  weak={["面向对象编程", "函数式编程", "数据结构与算法", "设计模式"]}
+/>
 
 <ResourceGrid>
   <BookCard title="代码大全" url="https://book.douban.com/subject/1477390/" />
@@ -186,9 +190,17 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 ### 游戏开发
 
-**强依赖：** [线性代数](数学.mdx#线性代数)、[编程基础](#编程基础)、[面向对象编程](#面向对象编程)、[开发工具](#开发工具)
-
-**弱依赖：** [信号与系统](数学.mdx#信号与系统)、[数值分析](数学.mdx#数值分析)、[设计模式](#设计模式)、[软件工程](#软件工程)、[计算机系统](原理.mdx#计算机系统)、[计算机图形学](原理.mdx#计算机图形学)
+<CourseDependencies
+  strong={["线性代数", "编程基础", "面向对象编程", "开发工具"]}
+  weak={[
+    "信号与系统",
+    "数值分析",
+    "设计模式",
+    "软件工程",
+    "计算机系统",
+    "计算机图形学",
+  ]}
+/>
 
 <ResourceGrid>
   <BookCard
@@ -211,9 +223,10 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 ### 网站开发
 
-**强依赖：** [编程基础](#编程基础)、[开发工具](#开发工具)
-
-**弱依赖：** [函数式编程](#函数式编程)、[软件工程](#软件工程)、[计算机网络](原理.mdx#计算机网络)、[数据库系统](原理.mdx#数据库系统)
+<CourseDependencies
+  strong={["编程基础", "开发工具"]}
+  weak={["函数式编程", "软件工程", "计算机网络", "数据库系统"]}
+/>
 
 <ResourceGrid>
   <WebCard title="全栈公开课" url="https://fullstackopen.com/en/" />
@@ -251,7 +264,7 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 ### 系统编程
 
-**强依赖：** [编程基础](#编程基础)、[计算机系统](原理.mdx#计算机系统)
+<CourseDependencies strong={["编程基础", "计算机系统"]} />
 
 <ResourceGrid>
   <BookCard
@@ -262,7 +275,7 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 ### 网络编程
 
-**强依赖：** [编程基础](#编程基础)、[计算机网络](原理.mdx#计算机网络)
+<CourseDependencies strong={["编程基础", "计算机网络"]} />
 
 <ResourceGrid>
   <BookCard
@@ -270,3 +283,5 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
     url="https://book.douban.com/subject/26434583/"
   />
 </ResourceGrid>
+
+{/* TODO ### 并发编程 */}
