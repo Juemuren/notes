@@ -6,17 +6,15 @@ interface Props {
 }
 
 const { title, url, type } = Astro.props;
-const labelKeys = {
-  book: "resourceCard.book",
-  video: "resourceCard.video",
-  web: "resourceCard.web",
-} as const;
-const label = Astro.locals.t(labelKeys[type]);
-const domain = type === "web" ? new URL(url).hostname.replace(/^www\./, "") : "";
+const domain = type === "web" ? new URL(url).hostname : "";
 const hue = [...title].reduce((sum, character) => sum + character.codePointAt(0)!, 0) % 360;
 ---
 
-<a class="resource-card not-content" href={url} style={`--resource-hue: ${hue}`}>
+<a
+  class="resource-card not-content"
+  href={url}
+  style={`--resource-hue: ${hue}`}
+>
   <span class:list={["preview", type]} aria-hidden="true">
     {
       type === "book" && (
@@ -62,10 +60,6 @@ const hue = [...title].reduce((sum, character) => sum + character.codePointAt(0)
         </>
       )
     }
-  </span>
-  <span class="meta">
-    <span class="type">{label}</span>
-    <span class="title">{title}</span>
   </span>
 </a>
 
@@ -353,39 +347,9 @@ const hue = [...title].reduce((sum, character) => sum + character.codePointAt(0)
     box-shadow: 0 0.18rem 0.45rem rgb(0 0 0 / 7%);
   }
 
-  .meta {
-    display: block;
-    margin-top: 0.65rem;
-  }
-
-  .type {
-    display: block;
-    color: var(--sl-color-gray-3);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-  }
-
-  .title {
-    display: -webkit-box;
-    margin-top: 0.1rem;
-    overflow: hidden;
-    color: var(--sl-color-white);
-    font-size: 0.92rem;
-    font-weight: 600;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
   .resource-card:hover .preview {
     border-color: var(--sl-color-accent);
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 24%);
-  }
-
-  .resource-card:hover .title {
-    color: var(--sl-color-text-accent);
   }
 
   .resource-card:focus-visible .preview {
