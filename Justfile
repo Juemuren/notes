@@ -11,6 +11,8 @@ lint:
 format:
     dprint fmt
 
+check: spell-check punctuation-check ocd-check
+
 spell-check:
     typos "{{ SOURCE }}"
 
@@ -24,8 +26,15 @@ ocd-check:
     ./scripts/check-emphasis.sh "{{ TARGET }}"
 
 lint-sh:
-    shellcheck scripts/*.sh
+    fd -e sh \
+        -x shellcheck
 
 fmt-sh:
-    fd -e sh -x \
-        shfmt --indent 2 --space-redirects --binary-next-line --write
+    fd -e sh \
+        -x shfmt --indent 2 --space-redirects --binary-next-line --write
+
+count-words sort="":
+    ./scripts/count-words.sh "{{ SOURCE }}" {{ sort }}
+
+list-timeline:
+    ./scripts/list-timeline.sh "{{ SOURCE }}"
