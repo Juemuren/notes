@@ -2,7 +2,7 @@
 title: 首页
 ---
 
-import { Card, LinkCard, CardGrid } from "@astrojs/starlight/components";
+import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
 
 ## 如何学习新技术
 
@@ -54,11 +54,6 @@ import { Card, LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 不过优秀的网页教材比较少，因此我使用的教材还是以书籍为主。
 
-下面是我自己使用过的教材，现在按课程分类整理出来。
-
-<CardGrid>
-  <LinkCard title="数学" href="./教材推荐/数学/" />
-  <LinkCard title="编程" href="./教材推荐/编程/" />
-  <LinkCard title="原理" href="./教材推荐/原理/" />
-  <LinkCard title="选学" href="./教材推荐/选学/" />
-</CardGrid>
+<LinkButton href="./教材推荐" icon="open-book" iconPlacement="start">
+  教材推荐
+</LinkButton>

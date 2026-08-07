@@ -2,6 +2,8 @@
 title: 教材推荐
 ---
 
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
 ## 课程分类
 
 课程按两种方式分类：按依赖分类和按内容分类
@@ -40,3 +42,10 @@ title: 教材推荐
 - 学习原理，不仅能够具象化数学中的抽象模型从而加深理解，也能在写的程序出问题进行深度的调试
 
 但学习计算机科学的过程中确实能明显感觉到，有些课程非常相似，有些课程则大相径庭。因此我根据这种感觉把所学课程分为了数学、编程和原理三大类。
+
+<CardGrid>
+  <LinkCard title="数学" href="./数学/" />
+  <LinkCard title="编程" href="./编程/" />
+  <LinkCard title="原理" href="./原理/" />
+  <LinkCard title="选学" href="./选学/" />
+</CardGrid>
