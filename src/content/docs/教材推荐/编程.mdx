@@ -15,7 +15,7 @@ import WebCard from "../../../components/WebCard.astro";
   <WebCard title="CS50x" url="https://cs50.harvard.edu/x/" />
   <BookCard title="C Primer Plus" url="https://book.douban.com/subject/26792521/" />
   <BookCard title="C 程序设计语言" url="https://book.douban.com/subject/1139336/" />
-  <WebCard title="C 参考手册" url="https://en.cppreference.com/c/" />
+  <WebCard title="C 参考手册" url="https://en.cppreference.com/c" />
   <WebCard title="Python 参考手册" url="https://docs.python.org/" />
   <WebCard title="SQL 参考手册" url="https://sqlite.org/lang.html" />
   <WebCard title="Web 参考手册" url="https://developer.mozilla.org/en-US/" />
@@ -27,12 +27,12 @@ import WebCard from "../../../components/WebCard.astro";
 
 1. 课程从 C 语言开始学习，这是相对低级的语言，适合理解计算机底层设计。计算机系统、操作系统、系统编程、网络编程等课程都要求掌握 C 语言。
 2. 课程随后过渡到 Python，这是相对高级的语言，适合理解计算思维和算法逻辑。人工智能、数值分析等课程都要求掌握 Python。
-3. 课程最后接触了一点 SQL 和 Web，这完全满足现代软件开发的需要，适合理解实际的应用开发场景。
+3. 课程最后接触了一点 SQL 和 Web，这常见于现代软件开发，适合理解实际的编程场景。
 
 如果不喜欢跟着课程学习，也可以自己阅读教材。
 
 - 如果你有一定的程序设计基础，或者天赋异禀，可以直接看《C 程序设计语言》。这是 C 语言的设计者写的书，绝对的权威教材。
-- 如果你毫无编程经验，那么可以试试《C Prime Plus》。这相比另一本书厚很多，对初学者更加友好。
+- 如果你毫无编程经验，那么可以试试《C Primer Plus》。这相比另一本书厚很多，对初学者更加友好。
 
 至于 Python、SQL、Web，从参考手册中了解一下基本语法和主要标准库就足够了。
 
@@ -45,7 +45,7 @@ import WebCard from "../../../components/WebCard.astro";
     title="C++ Primer"
     url="https://book.douban.com/subject/25708312/"
   />
-  <WebCard title="C++ 参考手册" url="https://en.cppreference.com/cpp/" />
+  <WebCard title="C++ 参考手册" url="https://en.cppreference.com/cpp" />
 </ResourceGrid>
 
 面向对象编程是一种非常重要的编程范式。本课程将学习面向对象编程中最基础的概念，包括封装、继承、多态等。这些同样是无关具体语言的编程技术。
@@ -54,7 +54,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 1. C++ 中有关面向对象编程的基本概念足够齐全。
 2. 后续的设计模式、软件工程、计算机图形学、游戏开发等课程都要求掌握 C++。
-3. C++ 基本语法和 C 语言相同。因此，如果已经有了 C 语言的基础，那么可以把精力更多地放在面向对象编程上，而不是被语法细节搞得晕头转向。
+3. C++ 沿用了 C 语言的部分语法。因此如果已有 C 语言的基础，就可以把精力更多地放在面向对象编程上，而不是被语法细节搞得晕头转向。
 
 关于选用的教科书《C++ Primer》，我个人觉得比较一般。
 
@@ -64,7 +64,7 @@ import WebCard from "../../../components/WebCard.astro";
 
 但鉴于这本书网上口碑不错，因此仍然选择这本书作为教材。不过阅读的时候记得取舍，不要被 C++ 的语法细节淹没。
 
-- 本书的第一部分讲语法，如果你有 C 语言基础，那么基本可以略过。
+- 本书的第一部分讲语法，如果已有 C 语言基础，那么可以只关注 C++ 独有的部分。
 - 本书的第二部分讲标准库，不用花太多时间，用来参考即可。
 - 本书的第三部分讲类设计工具，重点关注其中的面向对象编程和泛型编程部分。
 
@@ -84,11 +84,11 @@ import WebCard from "../../../components/WebCard.astro";
 
 《计算机程序的构造和解释》一书的定位存在很大争议。这是 MIT 计算机科学的入门教材，正如书名所说，其介绍了程序如何构造以及如何解释。但我更愿意称该书为一本编程哲学书，因为所讨论的内容常常涉及到计算机程序的本质。这不是一本讲述特定编程语言语法的书。相反，这是一本有助于培养抽象思维和理解计算本质的书。
 
-全书采用 Lisp 进行教学。该编程语言不太主流，但其特性很适合课程需要。
+全书采用 Scheme 进行教学。这是 Lisp 的一种方言，如今不算主流，但其特性很适合本课程。
 
-1. Lisp 支持函数式编程。函数式编程是一种很独特的编程范式。在函数式编程中，只有函数，没有别的变量。所有的过程和数据都是通过函数实现的。
-2. Lisp 不仅仅支持函数式编程。通过支持赋值，代码中产生了非函数的变量。有了变量后，就可以构造更高级的对象，实现更高级的操作。
-3. Lisp 的有很强的元语言抽象能力。元语言是用来定义其它语言的语言。而元语言抽象是指语言把自身作为元语言去创造新语言。Lisp 的元语言抽象能力非常强，因此可以很简单地去设计一门新的语言（通常称为 Lisp 方言）。
+1. Scheme 支持函数式编程。函数是一等公民，程序通过函数的定义、调用和组合来构造；名称用于绑定值，而非通过赋值不断修改状态。
+2. Scheme 也支持赋值。引入赋值后，名称绑定的值可以随程序执行而发生变化，程序因此拥有显式状态，可以构造有状态对象。
+3. Scheme 有很强的元语言抽象能力。元语言是用来定义其它语言的语言。而元语言抽象是指语言把自身作为元语言去创造新语言。
 
 全书共 5 章，大概可分为 3 个部分。
 
@@ -237,17 +237,17 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 
 现代 Web 技术已经不局限于制作网站
 
-- 几乎所有的用户界面，包括桌面应用、移动应用等都可以基于 Web 实现
-- 甚至服务端的应用也可以跑在 NodeJS 这个脱胎于 Web 技术的语言。
+- 几乎所有的用户界面，包括桌面应用、移动应用等都可以基于 Web 实现。
+- 服务端的应用也可以运行在 Node.js 这个脱胎于 Web 技术的运行时上。
 
 《全栈公开课》是 Helsinki 大学的公开课程，它覆盖了 Web 开发的所有主要内容。
 
 前 7 部分使用以下技术构建了一个全栈应用。
 
 - 使用 React 构建前端。
-- 使用 NodeJS 和 Express 构建后端。
+- 使用 Node.js 和 Express 构建后端。
 - 使用 MongoDB 作为数据库。
-- 使用 Vitest 和 PlayWright 作为测试框架。
+- 使用 Vitest 和 Playwright 作为测试框架。
 - 介绍 React Router、MUI、Styled 等库。
 - 介绍 Zustand 状态管理方案。
 - 介绍 Vite 和 esbuild 打包工具。
@@ -257,7 +257,7 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
 - 讲解如何用 TypeScript 实现类型安全。
 - 讲解如何用 GraphQL 设计服务端点。
 - 讲解如何用 React Native 构建移动应用。
-- 讲解如何用 Next.JS 完成全栈开发。
+- 讲解如何用 Next.js 完成全栈开发。
 - 以 PostgreSQL 为例介绍关系型数据库。
 - 以 Docker 为例介绍容器技术。
 - 以 GitHub Actions 为例介绍持续集成技术。
@@ -299,4 +299,4 @@ Smalltalk 是面向对象编程语言的鼻祖，只支持面向对象编程，�
   />
 </ResourceGrid>
 
-《Java 并发编程实战》是一本相当不错的并发编程参考书。虽然不同语言的并发模型不完全一样，但其数学原理与核心概念都是相似的。
+《Java 并发编程实战》介绍了线程安全、对象共享、任务执行、活跃性、性能、锁、原子变量和内存模型。虽然其以 Java 的线程模型和并发库为载体，但竞争条件、同步、死锁、可见性等核心问题仍普遍存在于其它语言的并发编程中。

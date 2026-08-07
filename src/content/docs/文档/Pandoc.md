@@ -52,7 +52,7 @@ pandoc example.md -o example.docx --reference-doc=custom-reference.docx
 
 Markdown 也支持双向转换
 
-Markdown 本身没有排版和样式的功能，导出为其他格式时需指定模板。Pandoc 默认的模板效果比较一般。你可以在 [Pandoc templates](https://pandoc-templates.org/) 上搜寻别人分享的模板。如果你不知道该用哪个模板，也许可以试试这个覆盖了几乎所有导出格式的 [学术模板](https://github.com/maehr/academic-pandoc-template)。
+Markdown 本身没有排版和样式的功能，导出为其它格式时需指定模板。Pandoc 默认的模板效果比较一般。你可以在 [Pandoc templates](https://pandoc-templates.org/) 上搜寻别人分享的模板。如果你不知道该用哪个模板，也许可以试试这个覆盖了几乎所有导出格式的 [学术模板](https://github.com/maehr/academic-pandoc-template)。
 
 #### Markdown 转 HTML
 
