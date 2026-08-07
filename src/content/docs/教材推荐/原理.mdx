@@ -220,7 +220,7 @@ import VideoCard from "../../../components/VideoCard.astro";
 
 ### 体系结构
 
-<CourseDependencies strong={["计算机系统"]} />
+<CourseDependencies strong={["计算机系统"]} weak={["逻辑设计", "计算机组成"]} />
 
 <ResourceGrid>
   <BookCard
@@ -228,6 +228,10 @@ import VideoCard from "../../../components/VideoCard.astro";
     url="https://book.douban.com/subject/36108789/"
   />
 </ResourceGrid>
+
+《计算机体系结构》使用量化的方式研究计算机架构，探索如何通过改善架构来提升性能。
+
+全书介绍了存储器层次结构、指令级并行、数据级并行、线程级并行、请求级并行等多种架构优化方法，内容非常全面。
 
 ### 编译原理
 
@@ -240,6 +244,8 @@ import VideoCard from "../../../components/VideoCard.astro";
   <BookCard title="编译原理" url="https://book.douban.com/subject/3296317/" />
 </ResourceGrid>
 
+《编译原理》就是著名的龙书，内容很全面，包含从词法分析、语法分析、语义分析到代码生成、代码优化的完整编译流水线。
+
 ### 操作系统
 
 <CourseDependencies strong={["编程基础", "数据结构与算法", "计算机系统"]} />
@@ -251,11 +257,61 @@ import VideoCard from "../../../components/VideoCard.astro";
   />
 </ResourceGrid>
 
-{/* TODO ### 高性能计算 */}
+《操作系统导论》全书结构清晰，把操作系统的功能分成了三类，并逐一介绍。
 
-{/* TODO ### 分布式系统 */}
+- 虚拟化部分讨论处理器虚拟化的进程和调度，以及内存虚拟化的地址空间、地址转换、分段和分页。
+- 并发部分讨论线程、锁、条件变量和信号量。
+- 持久化部分讨论存储设备、文件系统和分布式系统。
 
-{/* TODO ### 计算机安全 */}
+### 高性能计算
+
+<CourseDependencies strong={["计算机系统"]} weak={["体系结构"]} />
+
+<ResourceGrid>
+  <BookCard
+    title="大规模并行处理器编程实战"
+    url="https://book.douban.com/subject/25805801/"
+  />
+</ResourceGrid>
+
+《大规模并行处理器编程实战》介绍如何进行大规模并行处理器编程以实现高性能计算。全书内容相当丰富。
+
+- 介绍 GPU 的体系结构和计算流水线。
+- 介绍 CUDA 编程模型以及如何编写 CUDA 程序。
+- 介绍卷积、前缀和、稀疏矩阵向量乘法等多种并行模式。
+- 介绍 OpenCL、OpenACC、Thrust、C++ AMP 等多种并行编程接口。
+
+### 分布式系统
+
+<CourseDependencies strong={["计算机系统", "数据库系统"]} weak={["数据结构与算法"]} />
+
+<ResourceGrid>
+  <BookCard
+    title="数据密集型应用系统设计"
+    url="https://book.douban.com/subject/30329536/"
+  />
+</ResourceGrid>
+
+《数据密集型应用系统设计》详细介绍了一个数据密集型应用该如何设计。
+
+- 介绍关系模型、文档模型、图模型等数据模型，以及如何根据数据模型选择数据库类型。
+- 介绍事务处理系统和分析系统，以及如何根据数据访问模式优化数据存储。
+- 介绍以 JSON 为首的文本数据编码格式和以 Protocol Buffers 为首的二进制数据编码格式，并比较二者的优劣。
+- 分析分布式数据系统面临的挑战，以及主要的应对方式。
+- 比较批处理系统和流处理系统，并探讨数据系统的未来。
+
+### 计算机安全
+
+<CourseDependencies strong={["离散数学", "计算机系统"]} weak={["数据结构与算法", "数据库系统", "计算机网络", "操作系统", "软件工程"]} />
+
+<ResourceGrid>
+  <BookCard
+    title="计算机安全"
+    url="https://book.douban.com/subject/26904835/"
+  />
+</ResourceGrid>
+
+《计算机安全》内容非常全面，涵盖了密码学、数据库安全、云安全、软件安全、网络安全、系统安全等领域，甚至还关注了员工管理以及法律道德问题。建议作为工具书使用。
 
 ### 机器学习
 
@@ -270,3 +326,5 @@ import VideoCard from "../../../components/VideoCard.astro";
     url="https://book.douban.com/subject/35218199/"
   />
 </ResourceGrid>
+
+《机器学习实战》介绍如何使用 Scikit-Learn、Keras 和 TensorFlow 进行机器学习。虽然目前学术界更偏爱 PyTorch，但其核心思想都是一样的。

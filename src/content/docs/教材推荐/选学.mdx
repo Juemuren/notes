@@ -29,9 +29,21 @@ import ResourceGrid from "../../../components/ResourceGrid.astro";
   <BookCard title="陶哲轩实分析" url="https://book.douban.com/subject/30227556/" />
 </ResourceGrid>
 
-{/* TODO ### 复分析 */}
+### 复分析
 
-{/* TODO ### 泛函分析 */}
+<CourseDependencies strong={["微积分"]} />
+
+<ResourceGrid>
+  <BookCard title="复分析" url="https://book.douban.com/subject/35316347/" />
+</ResourceGrid>
+
+### 泛函分析
+
+<CourseDependencies strong={["线性代数"]} weak={["实分析", "拓扑学"]} />
+
+<ResourceGrid>
+  <BookCard title="泛函分析导论及应用" url="https://book.douban.com/subject/35941956/" />
+</ResourceGrid>
 
 ### 抽象代数
 
@@ -41,6 +53,18 @@ import ResourceGrid from "../../../components/ResourceGrid.astro";
   <BookCard title="高等近世代数" url="https://book.douban.com/subject/1953795/" />
 </ResourceGrid>
 
-{/* TODO ### 微分几何 */}
+### 微分几何
 
-{/* TODO ### 拓扑学 */}
+<CourseDependencies strong={["微积分"]} weak={["拓扑学"]} />
+
+<ResourceGrid>
+  <BookCard title="可视化微分几何和形式" url="https://book.douban.com/subject/36369485/" />
+</ResourceGrid>
+
+### 拓扑学
+
+<CourseDependencies strong={["离散数学"]} weak={["抽象代数"]} />
+
+<ResourceGrid>
+  <BookCard title="拓扑学" url="https://book.douban.com/subject/1801389/" />
+</ResourceGrid>
