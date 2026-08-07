@@ -252,6 +252,7 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 
 - [Jupyter](../编辑器/Jupyter.md) 交互式编程笔记本，功能非常强大。我把它放入了 _编辑器_ 这一章节
 - [Quarto](Quarto.md) 基于 Pandoc 和 Jupyter 构建的开源科技出版系统
+- [MDX](MDX.md) 在 Markdown 中编写 JSX 代码
 
 #### 代码文档生成器
 
