@@ -208,6 +208,7 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 
 - LibreOffice 可以认为是开源版的 `Microsoft Office`，包含了 DOCX、PPTX、PDF 等格式的编辑器
 - [Marp](Marp.md) 一个用 Markdown 制作幻灯片的工具，有丰富的社区主题且提供 VSCode 扩展
+- Slidev 另一个用 Markdown 制作幻灯片的工具，相比 Marp 功能更丰富且生态更好，提供 VSCode 扩展的同时支持使用 Vue 组件
 - Sigil 一个 EPUB 编辑器
 - StirlingPDF 一个 PDF 编辑器
 - [PDFcpu](PDFcpu.md) 一个可以对 PDF 文档进行各种处理的命令行工具。类似的还有 `qpdf`、`poppler`、`MuPDF`、`GhostScript`

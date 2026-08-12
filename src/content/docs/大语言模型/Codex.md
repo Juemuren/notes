@@ -10,14 +10,17 @@ Codex 是一个编程智能体，有 CLI、IDE Extension、Desktop APP 等多种
 
 ## 对比
 
-目前最火热的 Code Agent 就是 Codex/Claude Code/OpenCode 这三个。简单对比如下
+目前最火的 Code Agent 就是 Codex / Claude Code / OpenCode 这三个。简单对比如下
 
 | 角度       | Codex | Claude Code | OpenCode   |
 | ---------- | ----- | ----------- | ---------- |
 | 实现语言   | Rust  | TypeScript  | TypeScript |
-| 模型兼容性 | 弱    | 强          | 强         |
+| 开源       | 是    | 否          | 是         |
+| 模型兼容性 | 弱    | 弱          | 强         |
 
-除此之外这些 Code Agent 的用户体验几乎没什么区别，界面、快捷键、内置命令等都是相同的，用习惯了一个后完全可以无感地切换到另一个
+关于模型兼容性，显然 Codex 和 Claude Code 都是使用自家模型效果最好，而 OpenCode 则更加模型中立。因此，如果要使用别的模型，通常选择 OpenCode 最好。
+
+除此之外这些 Code Agent 的用户体验几乎没什么区别，界面、快捷键、内置命令等都是相同的，用习惯了一个后完全可以无感地切换到另一个。
 
 ## 安装
 
@@ -43,7 +46,7 @@ codex
 codex resume
 ```
 
-在交互界面中，按下 `/` 可以执行命令。一些常用的命令有
+在交互界面中，输入 `/` 可以执行命令。一些常用的命令有
 
 ```sh
 # 更换模型
@@ -72,4 +75,15 @@ codex resume
 /exit # 或者 /quit
 ```
 
-此外，按下 `@` 可以查找文件，按下 `!` 可以执行 Shell 命令。
+此外
+
+- 输入 `@` 可以查找文件
+- 输入 `!` 可以执行 Shell 命令
+- 输入 `$` 可以执行 Skill
+- 输入 `?` 打开帮助界面
+
+而帮助界面又提到了一些有用的快捷键，比如
+
+- `ctrl + g` 用外部编辑器编辑 prompt
+- `ctrl + r` 反向搜索 prompt 历史记录
+- `ctrl + t` 查看完整会话记录 transcript
