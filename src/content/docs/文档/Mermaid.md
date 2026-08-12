@@ -90,10 +90,11 @@ mermaid 提供了 [CLI 工具](https://github.com/mermaid-js/mermaid-cli)，可�
 
 ## 安装
 
-> [!note] 只介绍 CLI 工具
-> 本文只介绍 `mermaid-cli` 的安装和使用。
->
-> 对于客户端渲染，大多数 _静态网站生成器_ 和 _前端框架_ 都支持与 mermaid 集成，你可以阅读对应工具的文档。
+:::note[只介绍 CLI 工具]
+
+对于客户端渲染，大多数 _静态网站生成器_ 和 _前端框架_ 都支持与 mermaid 集成，你可以阅读对应工具的文档。
+
+:::
 
 目前 mermaid-cli 的安装非常麻烦，因为没有打包成单个二进制文件，必须安装 NodeJS 运行时并通过 npm 下载。有能力的或者感兴趣的可以看看 [GitHub Issues](https://github.com/mermaid-js/mermaid-cli/issues/467) 来帮忙解决这个问题
 
@@ -101,14 +102,15 @@ mermaid 提供了 [CLI 工具](https://github.com/mermaid-js/mermaid-cli)，可�
 
 ```sh
 # 设置 PUPPETEER_SKIP_DOWNLOAD，跳过无头浏览器的安装
-$env:PUPPETEER_SKIP_DOWNLOAD=1
+export PUPPETEER_SKIP_DOWNLOAD=1 # Bash
+$env:PUPPETEER_SKIP_DOWNLOAD=1 # Pwsh
 # 全局安装 mermaid-cli
 npm install -g @mermaid-js/mermaid-cli
 # 单独安装 chrome-headless，如果已经有的话可以不安装
 npx puppeteer browsers install chrome-headless-shell
 ```
 
-其中最后一步是可选的。如果你的系统中已有 `chromium` 内核的浏览器，可以先试试是否能够使用，不能用的话再去安装。
+其中最后一步是可选的。如果你的系统中已有 `chromium` 内核的浏览器，可以先试试能否使用，不能用的话再去安装。
 
 最后还要准备一个 `puppeteer.json` 文件，用于指定 `chrome-headless` 可执行文件的路径。通过 `npx puppeteer` 下载的无头浏览器一般在 `~/.cache/puppeteer` 目录里。对于比较新的 Windows 系统，可以先试试自带的 **Edge** 浏览器
 
@@ -128,6 +130,17 @@ npx puppeteer browsers install chrome-headless-shell
 ```sh
 mmdc -p puppeteer.json -i example.md -o example.temp.md
 ```
+
+:::tip[mmdr]
+
+mermaid-cli 有一个用 Rust 重写的 [mmdr](https://github.com/1jehuang/mermaid-rs-renderer)，后者不需要无头浏览器，渲染极快且安装方便。虽然目前还有一点兼容性问题，但非常推荐尝试
+
+```sh
+# Windows
+scoop install mmdr
+```
+
+:::
 
 ## 使用
 

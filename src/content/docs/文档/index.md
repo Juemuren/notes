@@ -75,8 +75,6 @@ $$
 \end{aligned}
 $$
 
-LaTeX 有很多的发行版，比如 `Texlive` 和 `MikTeX`，我个人更喜欢后者。另外还有一个更现代的工具 `Tectonic`，它不安装完整的 TeX 系统，而是在编译时自动获取宏包并缓存到本地。
-
 #### Typst
 
 Typst 类似 LaTeX，不过针对 LaTeX 的许多问题进行了改进。个人体验下来，相比 LaTeX 的主要优势为
@@ -119,7 +117,7 @@ PPTX 将内容以幻灯片的方式进行展示，一般用于现场演示。
 > [!note] PPT 和幻灯片
 > 对于幻灯片（Slide），[维基百科](https://en.wikipedia.org/wiki/Presentation_slide) 上的解释是
 >
->> 幻灯片是演示文稿的单页。一组幻灯片称为幻灯片套件。幻灯片演示是在电子设备或投影屏幕上展示一系列幻灯片或图像。
+> > 幻灯片是演示文稿的单页。一组幻灯片称为幻灯片套件。幻灯片演示是在电子设备或投影屏幕上展示一系列幻灯片或图像。
 >
 > 因此虽然 PPT/PPTX 现在成为了幻灯片的同义词，但它始终只是一种能进行幻灯片演示的格式。
 >
@@ -207,6 +205,7 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 对于 Markdown、HTML、LaTeX、Typst 这种存储为纯文本的文档，所有文本编辑器都可以对其进行修改。此处不列举这些文本编辑器，详见 [编辑器](../编辑器/index.md) 章节
 
 - LibreOffice 可以认为是开源版的 `Microsoft Office`，包含了 DOCX、PPTX、PDF 等格式的编辑器
+- Tectonic 一种基于 XeLaTeX 的现代 LaTeX 引擎，不安装完整的 TeX 系统，而是在编译时自动获取宏包并缓存到本地。不过为了最大的 LaTeX 兼容性，建议还是安装完整的 LaTeX 发行版，比如 `Texlive` / `MikTeX` / `TinyTex`，我个人更喜欢最后一个，安装方便且足够轻量，易于定制。
 - [Marp](Marp.md) 一个用 Markdown 制作幻灯片的工具，有丰富的社区主题且提供 VSCode 扩展
 - Slidev 另一个用 Markdown 制作幻灯片的工具，相比 Marp 功能更丰富且生态更好，提供 VSCode 扩展的同时支持使用 Vue 组件
 - Sigil 一个 EPUB 编辑器

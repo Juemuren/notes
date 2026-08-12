@@ -84,7 +84,7 @@ scoop shim add vs 'path\to\vs\Common7\Tools\Launch-VsDevShell.ps1' '--' -Arch am
 然后输入 `gcc --version` 或 `clang --version` 测试是否成功。
 
 > [!tip] 环境变量未更新
-> 如果你在 VSCode 的集成终端中输入以上命令时报错，这可能是因为 _PATH_ 变量并没有及时更新。你可以运行 `echo $env:PATH` 看看是不是这样。若确实如此，你可能需要重启一下 VSCode 而不仅仅是重启终端，从而让编辑器重新读取环境变量。
+> 如果你在 VSCode 的集成终端中输入以上命令时报错，这可能是因为 _PATH_ 变量并没有及时更新。你可以运行 `echo $env:PATH` / `echo $PATH` 看看是不是这样。若确实如此，你可能需要重启一下 VSCode 而不仅仅是重启终端，从而让编辑器重新读取环境变量。
 
 #### 配置智能感知
 

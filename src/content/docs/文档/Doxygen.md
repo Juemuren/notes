@@ -126,7 +126,7 @@ HTML_COLORSTYLE = TOGGLE
 # 是否生成 LATEX
 GENERATE_LATEX = YES
 # 使用的编译命令
-LATEX_CMD_NAME = lualatex
+LATEX_CMD_NAME = xelatex
 # 添加中文支持
 EXTRA_PACKAGES = [UTF8]{ctex}
 ```

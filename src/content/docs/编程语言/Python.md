@@ -42,7 +42,8 @@ mise settings add idiomatic_version_file_enable_tools python
 # 让 mise 自动激活 uv 创建的虚拟环境
 mise settings add python.uv_venv_auto source
 # 禁用 uv 自动下载 python 的功能
-echo 'python-downloads = "never"' >> "$env:APPDATA\uv\uv.toml"
+echo 'python-downloads = "never"' >> ~/.config/uv/uv.toml # Linux / macOS
+echo 'python-downloads = "never"' >> "$env:APPDATA\uv\uv.toml" # Windows
 ```
 
 更详细的设置请参考 [Uv](../包管理器/Uv.md) 和 [Mise](../环境管理器/Mise.md) 部分的内容

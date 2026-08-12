@@ -17,7 +17,7 @@ title: 命令行工具
 
 除 Shell 外，**包管理器** 也是一类重要的 CLI 程序。同样的，大多数系统都会自带包管理器，这些是 **系统包管理器**。在 Linux 发行版里，这可能是 `apt`、`pacman`、`yum` 等；而在较新的 Windows 里，这一般是 `winget`。而大多数语言也都有自己的 **语言包管理器**。
 
-此外还有一类被称为 **Coreutils** 的 CLI 程序，它们是 Linux 系统最常用的命令行工具，通常会预装在所有的 Linux 发行版里。Windows 系统并没有预装这些程序，不过 PowerShell 以 _内置命令_ 的方式实现了部分功能，或者你可以下载 _BusyBox_，它以单一可执行文件的方式提供了大部分常用的工具。
+此外还有一类被称为 **Coreutils** 的 CLI 程序，它们是 Linux 系统最常用的命令行工具，通常会预装在所有的 Linux 发行版里。Windows 系统并没有预装这些程序，不过 PowerShell 以 _内置命令_ 的方式实现了部分功能，或者可以下载 [microsoft/coreutils](https://github.com/microsoft/coreutils)，它是微软自己维护的 [uutils/coreutils](https://github.com/uutils/coreutils)，而后者是一个用 Rust 重写 Coreutils 的项目 ~~Rust 又一次拯救了 Windows 开发~~。
 
 然而以上仅仅是 CLI 工具的冰山一角。CLI 程序非常多，可能比你所知道的、有图形界面的软件还多。一些 CLI 程序尽管不会预装在系统里，但却可以显著提高开发效率。因此作为开发者，简要了解一下这部分 CLI 工具也是有用的。
 
@@ -43,7 +43,8 @@ title: 命令行工具
 - [Shell](Shell.md) 命令解释器，提供了与操作系统内核进行交互的环境
 - [just](Just.md) 任务运行器，语法类似 `Make` 但并不是构建系统
 - pueue 任务管理器，可以顺序和并行执行，适合长时间运行的任务
-- shellcheck 脚本静态检查工具，可以找出脚本中的错误与不规范
+- shellcheck 脚本静态检查工具
+- shfmt 脚本格式化工具
 - gum 用于交互式脚本的辅助工具，可以让脚本拥有华丽的 TUI
 - [prek](Prek.md) 提交前钩子管理器，可以与 `Git` 集成
 - [hyperfine](Hyperfine.md) 命令基准测试工具，`time` 的升级版，用于比较不同命令的速度
@@ -65,6 +66,7 @@ title: 命令行工具
 - [fd](Fd.md) 文件查找器，类似 `find` 但更现代
 - [eza](Eza.md) 文件目录查看工具，类似 `ls` 但更现代
 - yazi 文件管理器，有非常好用的 TUI
+- f2 批量重命名文件
 - [zoxide](Zoxide.md) 快速工作目录跳转
 
 ### 信息监控

@@ -160,13 +160,13 @@ Pandoc 通过将文档转为另一种格式，再使用 PDF 引擎生成 PDF。�
 
 中间格式我一般会选择 LaTeX、Typst 或 HTML 中的一个
 
-- **LaTeX** 推荐使用 _lualatex_ 引擎，对中文、数学公式的支持最好。不过 LaTeX 坑有点多，比如编译慢、安装环境很复杂，且默认的模板效果很差
+- **LaTeX** 推荐使用 _xelatex_ 引擎，对中文、数学公式的支持不错，且编译速度不太慢。不过 LaTeX 坑有点多，安装麻烦，配置复杂，且默认的模板效果很差
 - **Typst** 引擎指定 _typst_ 就行，默认的排版和样式就很不错。
 - **HTML** 引擎默认为 _weasyprint_。最大的优势是样式很丰富 ~~css 太强大了~~，但排版效果不太好。个人认为 pandoc 支持的引擎都不如 `chrome`，因此如果要通过 **HTML** 转 **PDF**，建议先转为 **HTML**，再使用 [chrome-headless 的打印功能](../网络/Chrome.md#无头模式) 生成 **PDF**
 
 ```sh
 # Markdown 通过 LaTeX 转 PDF
-pandoc -s example.md -o example.pdf --pdf-engine=lualatex --template="eisvogel.latex" -V CJKmainfont="Microsoft YaHei UI"
+pandoc -s example.md -o example.pdf --pdf-engine=xelatex --template="eisvogel.latex" -V CJKmainfont="Microsoft YaHei UI"
 # Markdown 通过 Typst 转 PDF
 pandoc -s example.md -o example.pdf --pdf-engine=typst -V mainfont="Microsoft YaHei UI"
 # Markdown 通过 HTML 转 PDF
