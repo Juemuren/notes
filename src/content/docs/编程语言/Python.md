@@ -32,20 +32,22 @@ mamba install ipykernel numpy matplotlib pandas
 - [安装 Mise](../环境管理器/Mise.md#安装)
 - [安装 uv](../包管理器/Uv.md#安装)
 
-> [!tip] Mise/Uv 的配置
->
-> 对于 Mise + Uv 这一组合，可以进行一些设置使二者用起来更舒适
->
-> ```sh
-> # 让 mise 能够支持 .python-version 等文件
-> mise settings add idiomatic_version_file_enable_tools python
-> # 让 mise 自动激活 uv 创建的虚拟环境
-> mise add settings python.uv_venv_auto source
-> # 禁用 uv 自动下载 python 的功能
-> echo 'python-downloads = "never"' >> "$env:APPDATA\uv\uv.toml"
-> ```
->
-> 更详细的设置请参考 [Uv](../包管理器/Uv.md) 和 [Mise](../环境管理器/Mise.md) 部分的内容
+:::tip[Mise/Uv 的配置]
+
+对于 Mise + Uv 这一组合，可以进行一些设置使二者用起来更舒适
+
+```sh
+# 让 mise 能够支持 .python-version 等文件
+mise settings add idiomatic_version_file_enable_tools python
+# 让 mise 自动激活 uv 创建的虚拟环境
+mise settings add python.uv_venv_auto source
+# 禁用 uv 自动下载 python 的功能
+echo 'python-downloads = "never"' >> "$env:APPDATA\uv\uv.toml"
+```
+
+更详细的设置请参考 [Uv](../包管理器/Uv.md) 和 [Mise](../环境管理器/Mise.md) 部分的内容
+
+:::
 
 然后，可以运行如下命令，新建项目并安装相应的依赖
 

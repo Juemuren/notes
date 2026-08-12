@@ -18,7 +18,7 @@ pnpm 的 [开发动机](https://pnpm.io/motivation) 以及与 yarn/npm 的 [特�
 # Windows
 scoop install pnpm
 # Mise
-mise pnpm uv -g
+mise use -g pnpm
 ```
 
 ## 配置
@@ -41,7 +41,20 @@ pnpm config set storeDir path/to/.pnpm-store
 - 如果指定了 `storeDir`，那么 pnpm 会选择复制包
 - 如果未指定 `storeDir`，那么 pnpm 会在文件系统根目录创建 `.pnpm-store` 并链接到安装位置
 
-详细说明请参考 [官方文档](https://pnpm.io/faq#does-pnpm-work-across-multiple-drives-or-filesystems)
+参考：https://pnpm.io/faq#does-pnpm-work-across-multiple-drives-or-filesystems
+
+### 版本管理
+
+pnpm 会识别项目中的 `package.json` 中声明的 `packageManager`，且默认会下载要求的 pnpm 版本。如果希望把管理 pnpm 版本的任务全权交给 mise，那么需要修改一下配置
+
+```sh
+# 让 mise 能够识别 package.json 中的 packageManager
+mise settings add idiomatic_version_file_enable_tools pnpm
+# 禁用 pnpm 自动下载声明版本的功能
+mise set --global PNPM_CONFIG_PM_ON_FAIL=ignore
+```
+
+参考：https://pnpm.io/cli/with#pmonfail
 
 ## 使用
 

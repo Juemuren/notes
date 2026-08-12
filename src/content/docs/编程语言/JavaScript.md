@@ -10,7 +10,9 @@ title: JavaScript
 
 JavaScript 的运行时一般选择 _nodejs_，不过 _deno_、_bun_ 也是不错的。浏览器的控制台里也可以运行 JavaScript 代码，如果只是想写点浏览器脚本发到 GreasyFork，甚至都没必要本地搭建环境
 
-如果不需要管理运行时版本，那么通过 scoop 直接安装即可，这默认会下载最新版
+:::caution[不管理运行时版本]
+
+如果不需要管理运行时版本，那么直接通过 scoop 直接安装即可，这默认会下载最新版
 
 ```sh
 scoop install nodejs
@@ -19,7 +21,11 @@ scoop install deno
 scoop install bun
 ```
 
-如果有管理运行时版本的需要，则可以安装专门的工具，比如 `nvm` 可以用来管理不同版本的 `nodejs`。不过我个人更喜欢 [mise](../环境管理器/Mise.md)，这是一个可以管理多种语言运行时版本的工具。对于 **JavaScript**，它支持管理 `nodejs`、`deno`、`bun` 的运行时版本
+但现代 JavaScript 项目通常都对版本有所要求，因此非常不建议使用这种安装方式。
+
+:::
+
+建议使用工具来管理语言运行时，比如 `nvm` 可以用来管理不同版本的 `nodejs`。不过我个人更喜欢 [mise](../环境管理器/Mise.md)，这是一个可以管理多种语言运行时版本的工具。对于 **JavaScript**，它支持管理 `nodejs`、`deno`、`bun` 的运行时版本
 
 mise 的以下命令可以安装并使用不同版本的运行时
 
@@ -35,6 +41,27 @@ mise use -g deno
 # 使用 bun latest
 mise use -g bun
 ```
+
+:::tip[安装 pnpm]
+
+虽然安装 node 时附带 npm 作为包管理器，但现代 Node.js 项目通常使用 pnpm 作为包管理器。因此，建议把 pnpm 一起安装了
+
+```sh
+mise use -g pnpm
+```
+
+pnpm 可以管理自身的版本，不过我更喜欢让 mise 来管理
+
+```sh
+# 让 mise 能够识别 package.json 中的 packageManager
+mise settings add idiomatic_version_file_enable_tools pnpm
+# 禁用 pnpm 自动下载声明版本的功能
+mise set --global PNPM_CONFIG_PM_ON_FAIL=ignore
+```
+
+更详细的设置请参考 [Pnpm](../包管理器/Pnpm.md) 和 [Mise](../环境管理器/Mise.md) 部分的内容
+
+:::
 
 ### 编辑器集成
 

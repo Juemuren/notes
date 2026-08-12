@@ -156,34 +156,6 @@ mise use -g pipx:argostranslate
 mise use -g pipx:markitdown
 ```
 
-#### 高级设置
-
-Mise 允许在语言运行时更新后，自动安装一些包。比如对于 NodeJS，可以在 `~/.default-npm-packages` 中写入
-
-```txt
-lodash
-request
-express
-```
-
-这种默认安装适合那些需要全局使用通用编程库，而非命令行工具。后者可能用 `mise use -g npm:xxx` 更好。
-
-如果希望 Mise 能够支持 `.nvmrc`、`.python-version` 等文件，需要添加一些设置。这样当你和别人协作时，如果别人的项目里有这些文件，你不需要安装对应的工具，也不需要在项目里添加 `mise.toml`，就可以和别人的体验一样，实现无缝的工具替换。
-
-```sh
-# 让 mise 能够支持 .python-version 等文件
-mise settings add idiomatic_version_file_enable_tools python
-# 让 mise 能够支持 .nvmrc 等文件
-mise settings add idiomatic_version_file_enable_tools node
-```
-
-对于 Python，如果希望 mise 和 uv 配合体验更好的话，那么可以添加一些设置。详细说明请参考 [官方文档](https://mise.jdx.dev/mise-cookbook/python.html#mise-uv)
-
-```sh
-# 让 mise 自动激活 uv 创建的虚拟环境
-mise add settings python.uv_venv_auto source
-```
-
 ### 环境变量
 
 mise 会自动在当前 shell 会话中设置环境变量，这个功能同样需要激活。
@@ -209,6 +181,12 @@ _.python.venv = "venv" # 这是虚拟环境的相对路径
 
 你可以在 [这里](https://mise.jdx.dev/environments/#env-directives) 找到更多的特殊环境变量
 
+此外，也可以用 mise 管理全局环境变量。相比写入 `~/.bashrc` / `~/.zshrc` 等方案，mise 可以更好的跨 Shell 同步。
+
+```sh
+mise set --global EDITOR="code --wait"
+```
+
 ### 任务
 
 可以通过 `mise tasks add build -- mkdocs build` 设置任务，这会在 `mise.toml` 中添加如下内容
@@ -228,3 +206,37 @@ run = "mkdocs build"
 ```
 
 `mise run build` 就可以运行 build 任务，`mise tasks ls` 会显示所有的任务，以及对应的描述信息
+
+### 高级设置
+
+#### 更新后自动安装包
+
+Mise 允许在语言运行时更新后，自动安装一些包。比如对于 NodeJS，可以在 `~/.default-npm-packages` 中写入
+
+```txt
+lodash
+request
+express
+```
+
+这种默认安装适合那些需要全局使用通用编程库，而非命令行工具。后者可能用 `mise use -g npm:xxx` 更好。
+
+#### 支持惯用版本声明文件
+
+如果希望 Mise 能够支持 `.nvmrc`、`.python-version` 等惯用的版本声明文件，需要添加一些设置。这样和别人协作时，如果项目里有这些文件，就不需要安装对应的工具，也不需要在项目里添加 `mise.toml`，实现无感的工具替换。
+
+```sh
+# 让 mise 能够支持 python 的惯用版本声明文件
+mise settings add idiomatic_version_file_enable_tools python
+# 让 mise 能够支持 node / pnpm 的惯用版本声明文件
+mise settings add idiomatic_version_file_enable_tools "node,pnpm"
+```
+
+#### 对特定工具的配置
+
+如果希望 mise 和 uv 配合体验更好的话，那么可以添加一些设置。详细说明请参考：https://mise.jdx.dev/mise-cookbook/python.html#mise-uv
+
+```sh
+# 让 mise 自动激活 uv 创建的虚拟环境
+mise settings add python.uv_venv_auto source
+```

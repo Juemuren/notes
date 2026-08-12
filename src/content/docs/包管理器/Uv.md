@@ -19,7 +19,7 @@ uv 相比 pip 有很多不同
 # Windows
 scoop install uv
 # Mise
-mise use uv -g
+mise use -g uv
 ```
 
 ## 使用
