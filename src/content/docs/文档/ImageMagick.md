@@ -10,7 +10,7 @@ ImageMagick 用于编辑和处理数字图像。它可用于创建、编辑、�
 
 ImageMagick 还有另一个分支叫 GraphicsMagick，后者更注重速度、稳定和易用，而前者则拥有更多高级功能
 
-另一个我常用的图片处理工具是 chafa，功能比 ImageMagick 要少
+另一个我常用的图片处理工具是 chafa，功能比 ImageMagick 要少。而 resvg 处理 SVG 效果通常比 ImageMagick 更好。
 
 ## 安装
 
