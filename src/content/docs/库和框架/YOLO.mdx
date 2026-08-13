@@ -2,6 +2,8 @@
 title: YOLO
 ---
 
+import { FileTree } from '@astrojs/starlight/components';
+
 ## 简介
 
 YOLO 全称为 _You Only Look Once_，是一类流行的物体检测和图像分割模型
@@ -62,7 +64,7 @@ yolo checks
 yolo predict model=yolo11n.pt source='https://ultralytics.com/images/bus.jpg'
 ```
 
-该命令会使用官方预训练的模型 `yolo11n.pt` 对 <https://ultralytics.com/images/bus.jpg> 这张图片进行预测。模型和图片会下载到当前工作目录，而运行的结果默认保存在当前工作目录的 `runs` 里。你可以检查下图片是否被正确预测。
+该命令会使用官方预训练的模型 `yolo11n.pt` 对 https://ultralytics.com/images/bus.jpg 这张图片进行预测。模型和图片会下载到当前工作目录，而运行的结果默认保存在当前工作目录的 `runs` 里。你可以检查下图片是否被正确预测。
 
 > [!tip] 网络问题
 > 如果因网络问题无法下载图片的话，你可以用自己的图片，只需修改 source 参数即可。如果无法下载模型，你可能不得不先解决网络问题。
@@ -134,16 +136,18 @@ yolo TASK MODE ARGS
 
 建议新建一个文件夹，并以如下方式命名和使用子文件夹
 
-```txt
-YOLO
-├── bin       # 二进制文件
-├── data      # 原始数据
-├── datasets  # 标注后的数据集
-├── docs      # 文档
-├── runs      # 运行结果
-├── scripts   # 脚本代码
-└── weights   # 权重模型
-```
+<FileTree>
+
+- YOLO
+  - bin/ 二进制文件
+  - data/ 原始数据
+  - datasets/ 标注后的数据集
+  - docs/ 文档
+  - runs/ 运行结果
+  - scripts/ 脚本代码
+  - weights/ 权重模型
+
+</FileTree>
 
 然后在 VSCode 中按 `ctrl + k, ctrl + o`，并选择此文件夹打开。
 
@@ -172,15 +176,17 @@ yolo settings datasets_dir="datasets"
 
 YOLO 的训练数据集建议按如下方式组织结构
 
-```txt
-example
-├── images
-│   ├── train
-│   └── val
-└── labels
-    ├── train
-    └── val
-```
+<FileTree>
+
+- example
+  - images
+    - train/
+    - val/
+  - labels
+    - train/
+    - val/
+
+</FileTree>
 
 分别把训练集的图片和标签放入 `images/train` 和 `labels/train` 里，验证集则是 `images/val` 和 `labels/val`。注意图片和标签的文件名必须相同。
 
