@@ -50,6 +50,11 @@ bat 集成了分页功能，且支持手册的高亮。也就是说我们可以�
 upx --help | bat -p -l man
 # 用 bat 读 fzf 的手册
 fzf --man | bat -p -l man
-# Windows 可能得用 groff 转换一下 fzf 的输出
-fzf --man | groff -man -T utf8 | bat -p -l man
+```
+
+Windows 则存在一些问题。首先 fzf 的手册得先用 mandoc 转换一下，然后 bat 读取这个文件也有部分字符未正确转义。因此用 less 阅读算是最好的选择了
+
+```sh
+fzf --man | mandoc > fzf.man
+less fzf.man
 ```

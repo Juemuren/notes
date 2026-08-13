@@ -43,8 +43,12 @@ title: 包管理器
 
 #### Windows
 
+- WinGet 微软官方推广的包管理器
 - [Scoop](Scoop.md) 官方自称为 `安装器`，但它事实上能完成包管理器的主要工作
 
 #### Linux
 
+- apt Ubuntu 等自带的包管理器
+- pacman Arch 等自带的包管理器
+- dnf Fedora 等自带的包管理器
 - [Homebrew](Homebrew.md) 支持 macOS 和 Linux 平台，是系统包管理器的良好补充，提升了用户体验
