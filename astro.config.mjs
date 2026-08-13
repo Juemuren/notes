@@ -6,6 +6,7 @@ import { starlightKatex } from "starlight-katex";
 
 import { markdownProcessor } from "./src/markdown/index.mjs";
 import { ignore, jq } from "./src/syntaxes/index.mjs";
+import { googleAnalytics } from "./src/config/googleAnalytics";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +19,7 @@ export default defineConfig({
     mermaid(),
     starlight({
       plugins: [starlightKatex()],
+      head: [...googleAnalytics],
       expressiveCode: {
         shiki: {
           langs: [jq, ignore],
