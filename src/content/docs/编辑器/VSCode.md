@@ -10,6 +10,16 @@ VSCode 是一个开源的代码编辑器，基于 Web 且有着非常强大的�
 
 建议使用 [官网](https://code.visualstudio.com/) 的安装程序。VSCode 的安装程序还是非常友好的
 
+## 配置
+
+VSCode 的配置相当多。我的配置已公开在 [Github](https://github.com/Juemuren/.dotfiles/tree/main/vscode/profiles)，可以用作参考。
+
+### 配置文件管理
+
+启用太多扩展可能会导致一些问题，比如占用内存变大、启动变慢等。但每打开一个不同的项目就要手动禁用、启用扩展又过于麻烦。配置文件的出现就是为了解决这个问题的，不仅支持为不同的项目配置不同的扩展，还可以配置不同的设置、键盘快捷方式、任务、代码片段等，功能非常强大
+
+配置文件的具体使用方式取决于个人习惯，而且目前功能似乎不太完善，比如 [配置文件不能继承](https://code.visualstudio.com/docs/configure/profiles#_can-i-inherit-settings-from-another-profile)。有需求的话建议去阅读 [官方文档](https://code.visualstudio.com/docs/configure/profiles)
+
 ## 扩展推荐
 
 和特定 [编程语言](../编程语言/index.md)/特定 [工具](../命令行工具/index.md) 有关的扩展就不列举在这里了，可以在相应的章节中查看
@@ -63,12 +73,6 @@ VSCode 是一个开源的代码编辑器，基于 Web 且有着非常强大的�
   - **GitHub Repositories** 远程浏览和编辑 GitHub 仓库。如果某些仓库特别大不适合 clone 到本地的话，这个扩展非常方便
   - **Azure Repos** 远程浏览和编辑 Azure 仓库
 - [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer) 提供了一个视图显示可连接的远程机器列表，让 _Remote - SSH_ 和 _Remote - Tunnels_ 用起来更方便
-
-## 配置文件管理
-
-启用太多扩展可能会导致一些问题，比如占用内存变大、启动变慢等。但每打开一个不同的项目就要手动禁用、启用扩展又过于麻烦。配置文件的出现就是为了解决这个问题的，不仅支持为不同的项目配置不同的扩展，还可以配置不同的设置、键盘快捷方式、任务、代码片段等，功能非常强大
-
-配置文件的具体使用方式取决于个人习惯，而且目前功能似乎不太完善，比如 [配置文件不能继承](https://code.visualstudio.com/docs/configure/profiles#_can-i-inherit-settings-from-another-profile)。有需求的话建议去阅读 [官方文档](https://code.visualstudio.com/docs/configure/profiles)
 
 ## 命令行
 

@@ -219,6 +219,7 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 >
 > - [Foam](https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode) 为 Markdown 扩展 **双链**、**区块**、**嵌入** 等语法，并新增 **图谱**、**查询**、**链接预览**、**每日笔记** 等功能，目标是类似 `Obsidian` 那样用 Markdown 打造个人知识库。
 > - [Markdown Extended](https://marketplace.visualstudio.com/items?itemName=jebbs.markdown-extended) 为 Markdown 扩展 **上标**、**下标**、**下划线**、**标记**、**缩写**、**属性** 等语法
+> - [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) Markdown 预览增强，集成了 Mermaid、PlantUML、WaveDrom、GraphViz、D2、TikZ、Vega、Kroki 等多种图表，并且可以导入文件从而支持 Plotly、JSXGraph 等图表，还可以运行本地命令从而支持 Matplotlib、Gunplot 等图表
 > - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) 全面的 Markdown 增强，提供了创建和更新目录、数学公式自动补全、常用快捷键等功能
 > - [Markdown Word Count](https://marketplace.visualstudio.com/items?itemName=CurlyBrackets.markdown-word-count) 统计 Markdown 中的字符数量
 > - [Markdown Table](https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable) 增强了 Markdown 的表格功能，包括快速插入行/列、格式化/美化表格、将 CSV/TSV 转为 Markdown 表格等
@@ -304,9 +305,14 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 
 用于制作或编辑图片的工具
 
-- [Mermaid](Mermaid.md) 一个基于 JavaScript 的代码生成图表工具，只能制作特定类型的图表。类似的工具还有 `plantUML`
+- [Mermaid](Mermaid.md) 一个基于 JavaScript 的代码生成图表工具，只能制作特定类型的图表
+- plantUML 类似 Mermaid，但对 UML 图的覆盖更完整
 - [TikZ](TikZ.md) 一个 LaTeX 生态的代码生成图片工具，理论上可以绘制所有类型的图片
 - Graphviz 代码生成图片的工具，`Doxygen`/`plantUML` 等都使用它作为底层引擎
+- Vega 使用 JSON 生成图片，适合可视化数据。其中 `Vega-Lite` 语法更简单，但会缺失一些功能
+- Gnuplot 命令行绘图工具，适合可视化数学函数或数据
+- D2 一种现代的图表脚本语言，将文本转换为图表。使用 Go 实现
+- Kroki 为各种文生图工具提供 API 接口
 - QRencode 二维码生成工具，可对输入的文本进行编码
 - Krita 数字绘画工具
 - Inkscape 矢量图编辑器

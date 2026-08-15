@@ -6,7 +6,13 @@ title: Mermaid
 
 Mermaid 是一个用 JavaScript 实现的图表绘制工具，可以通过简单的代码绘制图表。具体的语法可查阅 [官方文档](https://mermaid.js.org/intro/)
 
-mermaid 流行的主要原因就是可以把代码嵌入 MD 文档中。毕竟大多数时候 MD 都会转为 HTML，而 mermaid 恰好有 JavaScript 实现，这使得客户端可以自行完成图片的渲染。Github 的 MD 就支持渲染内嵌的 mermaid 代码，LLM 也常用 mermaid 来生成和展示图片。
+## 对比
+
+除了 Mermaid 外，还有很多能够用代码生成图表的工具。但 Mermaid 是其中最流行的方式之一。
+
+Mermaid 流行的主要原因就是可以把代码嵌入 Markdown 文档中。毕竟大多数时候 Markdown 都会转为 HTML，而 Mermaid 恰好有 JavaScript 实现，这使得客户端可以自行完成图片的渲染。Github 的 Markdown 就支持渲染内嵌的 Mermaid 代码，LLM 也常用 Mermaid 来生成和展示图片。
+
+## 原理
 
 ```mermaid
 sequenceDiagram
@@ -35,13 +41,13 @@ sequenceDiagram
 如果你掌握了基本的浏览器调试方法，你会发现你并没有接收到上面这张图片，而是接收到了下面的代码，然后在本地完成了渲染
 
 > [!tip] 浏览器调试
-> 在本页面右键并点击 **查看页面源代码**，你会看到上面的图表在原始 HTML 中还只是 `code` 而非 `svg`
+> 在本页面右键并点击 **查看页面源代码**，你会看到上面的图表在原始 HTML 中还只是 `pre` 而非 `svg`
 >
-> 打开 DevTools 的 **源代码** 栏，你应该还能在 `cdnjs.cloudflare.com` 下找到 mermaid 的 JavaScript 实现，它把原始 HTML 中 `code` 标签里的代码渲染为 `svg` 图片并进行了替换
+> 打开 DevTools 的 **源代码** 栏，你应该还能在 `notes/_astro/mermaid.core.***` 中找到 mermaid 的 JavaScript 实现，它把原始 HTML 中 `code` 标签里的代码渲染为 `svg` 图片并进行了替换
 >
-> 打开 DevTools 的 **元素** 栏，你会发现上面这张图里已经没有 `code` 标签了，而是被替换为了 `svg` 标签
+> 打开 DevTools 的 **元素** 栏，你会发现上面这张图里已经没有 `pre` 标签了，而是被替换为了 `svg` 标签
 
-```mermaid
+```txt
 sequenceDiagram
     participant DM as 开发机器
     participant SSG as 静态网站生成器
@@ -65,34 +71,33 @@ sequenceDiagram
     B ->> B: 把 HTML 中的 mermaid 渲染为 SVG
 ```
 
-mermaid 提供了 [CLI 工具](https://github.com/mermaid-js/mermaid-cli)，可以本地完成图片的导出。可以选择 png 或 svg 格式的图片，可以自定义 css 文件，还可以一键把 md 里所有内嵌的 mermaid 导出为图片，并在新输出的 md 文件里引用这些图片。最后一个功能我很喜欢，因为可以配合 pandoc 轻松地让 LLM 生成一个图文并茂的 docx 文档
-
-> [!tip] VSCode 扩展
-> mermaid 有官方 VSCode 扩展 [Mermaid Chart](https://marketplace.visualstudio.com/items?itemName=MermaidChart.vscode-mermaid-chart)，提供了语言服务、本地预览和导出等功能。
->
-> 上述扩展虽然是官方扩展，但口碑不太好。可以尝试使用社区扩展，不过功能会少一点
->
-> - [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) 已内置于 VSCode，可在 Markdown 中预览 Mermaid 图表
-> - [Mermaid Markdown Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting) 为 Mermaid 代码提供语法高亮
-
-## 对比
-
-除了 Mermaid 外，还有一些能够用代码生成图表的工具，比如 `plantUML`，两者有一些差别
-
-- plantUML 的语法和 Mermaid 不一样，但两者都很简单
-- plantUML 图的种类和 Mermaid 不完全一样，但两者都很丰富
-- plantUML 的体验和生态没有 Mermaid 好。plantUML 使用 Java 实现，无法只提供代码让接收者自行渲染
-
-对于最后一点，让 **代码在客户端进行渲染** 的好处是显而易见的
-
-- 集成方便。对于 Web 应用，不需要配置后端服务；对于文档，不需要先本地生成图片再进行插入
-- 可自定义。客户端能够定制渲染的样式，这允许实现真正的暗黑模式，而非粗暴地反转图片颜色（事实上，Mermaid 已经内置了多种主题）
-
 ## 安装
 
-:::note[只介绍 CLI 工具]
+Mermaid 提供 [CLI 工具](https://github.com/mermaid-js/mermaid-cli)，可以本地完成图片的导出；也提供了 [VSCode 扩展](https://marketplace.visualstudio.com/items?itemName=MermaidChart.vscode-mermaid-chart)，便于编辑源代码。
 
-对于客户端渲染，大多数 _静态网站生成器_ 和 _前端框架_ 都支持与 mermaid 集成，你可以阅读对应工具的文档。
+### VSCode 扩展
+
+官方 VSCode 扩展为 [Mermaid Chart](https://marketplace.visualstudio.com/items?itemName=MermaidChart.vscode-mermaid-chart)，提供了语言服务、本地预览和导出等功能。
+
+:::tip[社区扩展]
+
+官方扩展集成了很多 AI 功能，并且非常臃肿，口碑不是很好。如果反感可以尝试一下社区的扩展
+
+- [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) 已内置于 VSCode，可在 Markdown 中预览 Mermaid 图表
+- [Mermaid Markdown Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting) 为 Mermaid 代码提供语法高亮
+
+:::
+
+### CLI 工具
+
+:::tip[mmdr]
+
+mermaid-cli 有一个用 Rust 重写的 [mmdr](https://github.com/1jehuang/mermaid-rs-renderer)，后者不需要无头浏览器，渲染极快且安装方便。虽然目前还有一点兼容性问题，但非常推荐尝试
+
+```sh
+# Windows
+scoop install mmdr
+```
 
 :::
 
@@ -131,16 +136,97 @@ npx puppeteer browsers install chrome-headless-shell
 mmdc -p puppeteer.json -i example.md -o example.temp.md
 ```
 
-:::tip[mmdr]
+### Web 集成
 
-mermaid-cli 有一个用 Rust 重写的 [mmdr](https://github.com/1jehuang/mermaid-rs-renderer)，后者不需要无头浏览器，渲染极快且安装方便。虽然目前还有一点兼容性问题，但非常推荐尝试
+:::tip[静态网站生成器]
 
-```sh
-# Windows
-scoop install mmdr
-```
+大多数 _静态网站生成器_ 和 _前端框架_ 都有更方便的 Mermaid 集成方法，你可以阅读对应的文档。
 
 :::
+
+这是我在自己的 [Hugo 博客](https://juemuren.github.io/blog/) 中对 Mermaid 的配置，可以监视主题变化然后重新渲染
+
+```html
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+function getTheme() {
+  return document.documentElement.dataset.theme === 'dark'
+    ? 'dark'
+    : 'neutral';
+}
+
+function createDiagram(source, index) {
+  const container = document.createElement('div');
+  container.className = 'mermaid-container';
+  source.replaceWith(container);
+
+  return {
+    id: `mermaid-diagram-${index + 1}`,
+    code: source.textContent.trim(),
+    container,
+  };
+}
+
+async function renderDiagram({ id, code, container }) {
+  const { svg, bindFunctions } = await mermaid.render(id, code, container);
+  container.innerHTML = svg;
+  bindFunctions?.(container);
+}
+
+async function renderDiagrams(diagrams) {
+  mermaid.initialize({ theme: getTheme(), startOnLoad: false });
+  await Promise.all(diagrams.map(renderDiagram));
+}
+
+function observeThemeChanges(onThemeChange) {
+  const observer = new MutationObserver(() => {
+    onThemeChange();
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+}
+
+function init() {
+  const diagrams = Array.from(
+    document.querySelectorAll('pre.mermaid'),
+    createDiagram
+  );
+
+  observeThemeChanges(() => renderDiagrams(diagrams));
+  renderDiagrams(diagrams);
+}
+
+init();
+</script>
+<style>
+.mermaid-container {
+  margin: var(--content-gap) auto;
+}
+.mermaid-container svg {
+  display: block;
+  margin-inline: auto;
+}
+</style>
+```
+
+除此之外还要在 `layouts/partials/extend_head.html` 中添加如下代码
+
+```html
+{{ if .Store.Get "hasMermaid" }} {{ partial "mermaid.html" . }} {{ end }}
+```
+
+最后添加 `layouts/_default/_markup/render-codeblock-mermaid.html` 文件
+
+```html
+<pre class="mermaid">
+  {{ .Inner | htmlEscape | safeHTML }}
+</pre>
+{{ .Page.Store.Set "hasMermaid" true }}
+```
 
 ## 使用
 

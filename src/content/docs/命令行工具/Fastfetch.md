@@ -43,7 +43,7 @@ fastfetch
 
 ![Fastfetch](../../../assets/images/fastfetch.png)
 
-该配置以及相关的所有文件都已公开在 [Github](https://github.com/Juemuren/.dotfiles)
+该配置以及相关的所有文件都已公开在 [Github](https://github.com/Juemuren/.dotfiles/tree/main/fastfetch)
 
 _sakiko.txt_ 这个文件是通过 `chafa` 转换 [图片](https://www.pixiv.net/artworks/116605690) 得到的
 

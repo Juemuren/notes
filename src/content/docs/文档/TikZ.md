@@ -73,7 +73,7 @@ VSCode 扩展 [TikZ in Markdown](https://marketplace.visualstudio.com/items?item
 
 而对于 Markdown 博客来说，集成会更加复杂一点。
 
-我使用的 SSG 是 [Hugo](https://gohugo.io/)，主题为 [PaperMod](https://github.com/adityatelange/hugo-PaperMod/)。我换了个更快的源，并添加了一些样式以实现居中、横向滚动和自动适配黑暗模式
+我使用的 SSG 是 [Hugo](https://gohugo.io/)。我换了个更快的源，并添加了一些样式以实现居中、横向滚动和自动适配黑暗模式
 
 ```html
 <link
