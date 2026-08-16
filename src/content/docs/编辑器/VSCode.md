@@ -102,6 +102,14 @@ code --list-extensions --show-versions
 code --diff file1 file2
 ```
 
+:::tip[配置 git 差异工具]
+
+通过修改 git 配置，可以让 git 使用 code 查看差异。
+
+详细的配置方法请参阅 [git](../命令行工具/Git.md)。
+
+:::
+
 可以运行 `code --help` 或阅读 [官方文档](https://code.visualstudio.com/docs/configure/command-line) 了解更多功能
 
 ## 制作自己的扩展

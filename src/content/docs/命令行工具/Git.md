@@ -61,6 +61,8 @@ scoop install git
 apt install git
 # Arch
 pacman -S git
+# macOS
+brew install git
 ```
 
 ## 使用
@@ -206,4 +208,23 @@ git reset <commit-hash> # 指定的提交
 git rebase -i HEAD~5        # 前五个提交
 git rebase -i <commit-hash> # 指定的提交
 git rebase -i --root        # 初始提交
+```
+
+### 配置差异工具
+
+VSCode 有更易阅读 diff 视图。由于 VSCode 提供了命令行工具 [code](../编辑器/VSCode.md#命令行)，因此可以修改 `~/.gitconfig` 让 git 能够使用 VSCode 的 diff
+
+```ini
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+```
+
+之后就可以使用 `git difftool` 打开 VSCode 的预览视图来查看差异。而 `git difftool` 的用法和 `git diff` 完全相同
+
+```sh
+git difftool <commit-hash> <commit-hash>
 ```
