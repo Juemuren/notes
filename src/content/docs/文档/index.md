@@ -193,8 +193,9 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 
 用于阅读文档的工具
 
-- glow 终端 Markdown 渲染器，功能非常有限，但至少比直接阅读源代码更舒服一点
-- [bat](../数据处理/Bat.md) 更现代的 cat，也能用于在终端阅读 Markdown，但功能上远不止于 Markdown
+- glow 终端 Markdown 阅读器
+- fx 终端 JSON 阅读器
+- [bat](../数据处理/Bat.md) 更现代的 cat，也能用于在终端阅读 Markdown / JSON 等文件
 - SumatraPDF 开源的 PDF/EPUB 阅读器，非常轻量和快速，没有臃肿的功能。只能用于 Windows 平台
 - Readest 功能丰富的电子书阅读器，可跨平台，支持桌面端和移动端
 - Zeal 离线文档阅读器
@@ -248,6 +249,10 @@ PNG 适合需要无损压缩或者透明通道的场合，比如有透明背景�
 
 - [markdownlint](Markdownlint.md) 一个 Markdown 静态检查工具，提供 CLI 和 VSCode 扩展
 - dprint 格式化工具，支持包括 Markdown / YAML 等多种语言，可以看作 prettier 的 Rust 改进版
+
+用于链接检查的工具
+
+- lychee 快速的异步检查器，检查文档中的链接是否有效
 
 #### 代码嵌入
 

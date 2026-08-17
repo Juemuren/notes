@@ -74,3 +74,4 @@ flowchart LR
 ### TUI
 
 - [Neovim](Neovim.md) Vim 的现代版本，更易用且可扩展性更强。Neovim 的扩展使用 VimScript/Lua 编写，复用了 Vim 生态的同时还有属于自己的生态。
+- Helix 后现代模态文本编辑器，受 Kakoune / Neovim 启发，使用 Rust 实现
