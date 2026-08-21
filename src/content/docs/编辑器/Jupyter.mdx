@@ -2,6 +2,8 @@
 title: Jupyter
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 ## 简介
 
 Jupyter 是个交互式开发环境，由 **前端**、**后端**、**内核** 三部分组成。前端提供了可交互的界面，并能够进行渲染；后端负责处理前端的请求，并和内核通信；内核可以实际执行代码，并提供了特殊命令。
@@ -114,16 +116,22 @@ jupyter nbconvert example.ipynb --to latex --output export
 
 $\LaTeX$ 内置的模板只有 `base`/`article`/`report`，可以自定义模板或下载社区里的模板。
 
-> [!tip] LaTeX 的中文配置和效果改善
->
-> 由于 LaTeX 不像 HTML 天然支持中文，并且内置的模板不忠于 Jupyter 笔记本的实际渲染效果，因此建议下载社区的模板或自己修改模板。
->
-> 我目前的做法是魔改 [nb_pdf_template](https://github.com/t-makaro/nb_pdf_template) 模板
->
-> 1. 首先到 [share/templates/latex_authentic](https://github.com/t-makaro/nb_pdf_template/tree/master/share/templates/latex_authentic) 页面下载 [conf.json](https://github.com/t-makaro/nb_pdf_template/blob/master/share/templates/latex_authentic/conf.json) 和 [index.tex.j2](https://github.com/t-makaro/nb_pdf_template/blob/master/share/templates/latex_authentic/index.tex.j2) 这两个文件。
-> 2. 然后把文件手动复制到对应环境的模板文件夹中。若 Python 环境是用 `miniforge` 安装的，则其具体位置为 `/path/to/miniforge/envs/<env_name>/share/jupyter/nbconvert/templates/<template_name>`，其中 `<template_name>` 为模板名，可以自己命名。
-> 3. 最后修改 `index.tex.j2` 文件，将 `\documentclass[11pt]{article}` 改为 `\documentclass[11pt]{ctexart}`
-> 4. 使用时通过 `--template <template_name>` 选择自定义的模板
+:::tip[LaTeX 的中文配置和效果改善]
+
+由于 LaTeX 不像 HTML 天然支持中文，并且内置的模板不忠于 Jupyter 笔记本的实际渲染效果，因此建议下载社区的模板或自己修改模板。
+
+我目前的做法是魔改 [nb_pdf_template](https://github.com/t-makaro/nb_pdf_template) 模板
+
+<Steps>
+
+1. 到 [share/templates/latex_authentic](https://github.com/t-makaro/nb_pdf_template/tree/master/share/templates/latex_authentic) 页面下载 [conf.json](https://github.com/t-makaro/nb_pdf_template/blob/master/share/templates/latex_authentic/conf.json) 和 [index.tex.j2](https://github.com/t-makaro/nb_pdf_template/blob/master/share/templates/latex_authentic/index.tex.j2) 这两个文件。
+2. 把文件手动复制到对应环境的模板文件夹中。若 Python 环境是用 `miniforge` 安装的，则其具体位置为 `/path/to/miniforge/envs/<env_name>/share/jupyter/nbconvert/templates/<template_name>`，其中 `<template_name>` 为模板名，可以自己命名。
+3. 修改 `index.tex.j2` 文件，将 `\documentclass[11pt]{article}` 改为 `\documentclass[11pt]{ctexart}`
+4. 使用时通过 `--template <template_name>` 选择自定义的模板
+
+</Steps>
+
+:::
 
 之后就是编译 `tex` 文件得到 _PDF_，这要求本机已安装 $\TeX$ 环境
 
