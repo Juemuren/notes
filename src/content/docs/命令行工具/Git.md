@@ -204,11 +204,20 @@ Git 的提交历史可以回溯和修改
 # 回溯到之前的某个提交
 git reset HEAD~1        # 前一个提交
 git reset <commit-hash> # 指定的提交
-# 修改、合并、删除某个提交之后的提交
+# 交互式地修改某个提交之后的提交历史
 git rebase -i HEAD~5        # 前五个提交
 git rebase -i <commit-hash> # 指定的提交
 git rebase -i --root        # 初始提交
 ```
+
+可以把当前提交作为补丁添加到之前的某个提交上
+
+```sh
+git commit --fixup=<commit-hash>
+git rebase -i --autosquash <commit-hash>^
+```
+
+rebase 编辑器打开时，Git 会自动把 `fixup!` 提交移动到目标提交之后，并标记为 `fixup`。确认没问题后直接保存退出即可
 
 ### 配置差异工具
 

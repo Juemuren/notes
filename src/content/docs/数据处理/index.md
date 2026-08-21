@@ -118,7 +118,7 @@ TSV 相比 CSV 更易于人工编辑，因为制表符不常出现在数据中�
 - [jq](Jq.md) 命令行 JSON 处理器
 - [yq](Yq.md) 命令行 YAML 处理器
 - taplo / tombi 命令行 TOML 处理器
-- xmlstarlet 命令行 XML 处理器
+- xmlstarlet / xmllint 命令行 XML 处理器
 - mq / mdq 命令行 Markdown 处理器
 - qsv 命令行 CSV/TSV 处理器
 
