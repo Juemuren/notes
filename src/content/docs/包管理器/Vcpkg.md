@@ -12,12 +12,12 @@ Vcpkg 是一个 C/C++ 的包管理器，与 CMake 的集成度很高。
 
 `vcpkg` 不同于 **系统包管理器**，建议与之配合使用，因为二者 **优势区间** 不同
 
-1. 优势
-   - 项目级别的环境隔离，不影响系统环境，减少了环境冲突的问题
-   - 清单文件 `vcpkg.json` 让依赖项更清晰，且可以 `vcpkg install` 一步完成所有依赖的安装
-   - 方便了跨平台的协作，减少了 `在我的机器上可以运行` 这类问题
-2. 劣势
-   - 要写 `CMakePresets.json`，小型项目和个人项目不如系统包管理器方便
+- 优势
+  - 项目级别的环境隔离，不影响系统环境，减少了环境冲突的问题
+  - 清单文件 `vcpkg.json` 让依赖项更清晰，且可以 `vcpkg install` 一步完成所有依赖的安装
+  - 方便了跨平台的协作，减少了 `在我的机器上可以运行` 这类问题
+- 劣势
+  - 要写 `CMakePresets.json`，小型项目和个人项目不如系统包管理器方便
 
 ## 安装
 
@@ -30,9 +30,10 @@ export VCPKG_ROOT=/path/to/vcpkg
 export PATH=$VCPKG_ROOT:$PATH
 ```
 
-或者使用 scoop 安装
+或者使用包管理器安装
 
 ```sh
+# Windows
 scoop install vcpkg
 ```
 

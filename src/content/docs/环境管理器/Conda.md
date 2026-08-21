@@ -10,16 +10,22 @@ Conda 会创建一些互相隔离的虚拟环境，可以激活不同的虚拟�
 
 ## 对比
 
+### miniforge
+
 [Miniforge 对比其它项目](https://conda-forge.org/docs/user/introduction/)
 
 Conda 有多种实现，比如 _Miniforge_ 和 _Anaconda_，个人更推荐使用前者
 
-1. 优势
-   - 默认提供了更快速的包管理器 `mamba`，兼容所有常用的 `conda` 命令。当然 `conda` 在 _Miniforge_ 里也是可用的
-   - 默认使用 `conda-forge` 渠道下载，这是社区维护的包渠道，包数量更多、包更新更及时、平台支持更丰富，且完全不用担心许可协议的问题
-   - `base` 环境非常干净，只有包管理程序运行所需的组件
-2. 劣势
-   - 默认不安装 `Anaconda Navigator`，无法以可视化的方式使用包管理器
+- 优势
+  - 默认提供了更快速的包管理器 `mamba`，兼容所有常用的 `conda` 命令。当然 `conda` 在 _Miniforge_ 里也是可用的
+  - 默认使用 `conda-forge` 渠道下载，这是社区维护的包渠道，包数量更多、包更新更及时、平台支持更丰富，且完全不用担心许可协议的问题
+  - `base` 环境非常干净，只有包管理程序运行所需的组件
+- 劣势
+  - 默认不安装 `Anaconda Navigator`，无法以可视化的方式使用包管理器
+
+### pixi
+
+另外 [pixi](Pixi.md) 也是一个基于 Conda 生态的环境管理器，采用了和 Conda 完全不同的架构，用户体验更好。如果只是需要利用 Conda 生态的话，非常建议尝试一下。
 
 ## 安装
 

@@ -90,4 +90,4 @@ WSL 本质上是个虚拟机，而虚拟机的网络连接方式略微有点复�
 5. 在 Windows 文件系统中运行 Steamcommunity_302，然后 WSL 里就可以正常使用 Git 了
 
 > [!caution] Steamcommunity_302 的问题
-> Steamcommunity_302 并没有开。如果介意，建议还是使用 Clash。
+> Steamcommunity_302 并没有开源。如果介意，建议还是使用 Clash。
