@@ -165,7 +165,7 @@ sqlite3 -json example.db "SELECT * FROM users" > output.json
 
 ## 示例
 
-我想要统计游戏中的芯片数量，以了解该优先刷取哪个副本。首先需要一个 `chips.csv` 文件
+我想要统计游戏中的芯片数量，以了解该优先刷取哪个副本。首先准备一个 `chips.csv` 文件
 
 ```csv
 职业,芯片类型,数量
@@ -187,9 +187,7 @@ sqlite3 -json example.db "SELECT * FROM users" > output.json
 医疗,大,13
 ```
 
-该文件可以手写，也可以先用 MAA 的仓库识别功能得到 JSON，然后再编写脚本转为 CSV。脚本语言使用 _python_、_jq_ 甚至 _sql_ 都行。
-
-有了 CSV 文件后需要将其导入数据库。该这些 SQL 语句和操作可以保存在 `chip_import.sql` 文件里，通过 `sqlite3 chips.db < chips_import.sql` 来执行
+有了 CSV 文件后需要将其导入数据库。这些 SQL 语句和操作保存在 `chip_import.sql` 文件里，通过 `sqlite3 chips.db < chips_import.sql` 来执行
 
 ```sql
 -- 创建表
@@ -202,7 +200,6 @@ CREATE TABLE IF NOT EXISTS chips (
 
 -- 导入 CSV 数据
 .mode csv
--- 跳过表头
 .import --skip 1 chips.csv chips
 ```
 
@@ -239,23 +236,26 @@ FROM chips
 WHERE
     芯片类型 = '小' AND 数量 < 5
 ORDER BY 数量 DESC;
+```
 
--- 对大芯片的查询是类似的
+对大芯片的查询是类似的
+
+```sql
 SELECT *
 FROM chips
 WHERE 芯片类型 = '大'
 ORDER BY 数量 DESC;
 ```
 
-以上 SQL 语句同样可以保存在 `chip_query.sql` 文件里，通过 `sqlite3 chips.db < chips_query.sql` 反复调用。如果不想一次执行这么多查询，也可以分开保存。
-
-目前可以用如下方式更新数据库
+然后是更新数据。目前已经可以使用如下方式更新数据库
 
 1. 修改 `chips.csv` 文件
 2. 删除 `chips.db` 文件
 3. 重新将 `chips.csv` 导入 `chips.db`，即再次运行 `sqlite3 chips.db < chips_import.sql`
 
-当然也可以直接在数据库上进行更新。一种方式是先运行 `sqlite3 chips.db` 打开数据库文件，再交互地运行 SQL 语句
+当然也可以直接在数据库上进行更新。
+
+一种方式是先运行 `sqlite3 chips.db` 打开数据库文件，再交互地运行 SQL 语句
 
 ```sql
 -- +1 重装 大 芯片
@@ -264,7 +264,7 @@ SET 数量 = 数量 + 1
 WHERE 职业 = '重装' AND 芯片类型 = '大';
 ```
 
-另一种方式是将更新操作封装为一个脚本，使用 `bash`、`python` 等语言都可以。下面是用 [just](../命令行工具/Just.md) 的例子，任务写在 `Justfile` 里，使用 `just update <职业> <芯片类型> <增减量>` 执行更新操作
+另一种方式是将更新操作封装为一个脚本。比如使用 [just](../命令行工具/Just.md)，把任务写在 `Justfile` 里，运行 `just update <职业> <芯片类型> <增减量>` 执行更新操作
 
 ```justfile
 DB := "chips.db"
@@ -278,30 +278,6 @@ update job type increment:
 
 ```sh
 sqlite3 -header -csv chips.db "SELECT * FROM chips" > chips.csv
-```
-
-最后是完整的 `Justfile` 文件，把之前的所有操作（导入、导出、查询、更新）都封装为了简单的任务
-
-```justfile
-DB := "chips.db"
-
-[default]
-default:
-    @just --list
-
-import:
-    rm -f "{{DB}}"
-    sqlite3 "{{DB}}" < chips_import.sql
-
-export file="chips.csv":
-    sqlite3 -header -csv "{{DB}}" "SELECT * FROM chips" > {{file}}
-
-query:
-    sqlite3 "{{DB}}" < chips_query.sql
-
-update job type increment:
-    sqlite3 "{{DB}}" "UPDATE chips SET 数量 = 数量 {{increment}} WHERE 职业 = '{{job}}' AND 芯片类型 = '{{type}}'"
-    sqlite3 "{{DB}}" "SELECT * FROM chips WHERE 职业 = '{{job}}' AND 芯片类型 = '{{type}}'"
 ```
 
 ---
