@@ -217,19 +217,19 @@ import WebCard from "../../../components/WebCard.astro";
     title="类型和程序设计语言"
     url="https://book.douban.com/subject/1318672/"
   />
+  <WebCard title="OCaml 参考手册" url="https://ocaml.org/manual/" />
+  <WebCard title="Java 参考手册" url="https://docs.oracle.com/javase/specs/" />
 </ResourceGrid>
 
 本课程学习编程语言背后的形式化理论，包括 lambda 演算、操作语义、类型系统及其元理论。
 
-选择的教材为《类型和程序设计语言》。本书的重点是形式语义和类型理论，用于补充此前程序构造与解释、面向对象编程、函数式编程和编译原理等课程未能覆盖到的编程语言原理，也可以看作计算理论课程在编程语言这一领域更深入的学习。
+选择的教材为《类型和程序设计语言》，其中代码示例使用 OCaml，并以 Java 的面向对象类型系统作为研究对象。本书的重点是形式语义和类型理论，用于补充此前程序构造与解释、面向对象编程、函数式编程和编译原理等课程未能覆盖到的编程语言原理。
 
 ### 形式化验证
 
 <CourseDependencies
-  strong={["函数式编程"]}
-  weak={[
-    "编程语言",
-  ]}
+  strong={["离散数学"]}
+  weak={["程序构造与解释", "函数式编程", "编程语言"]}
 />
 
 <ResourceGrid>
@@ -241,12 +241,16 @@ import WebCard from "../../../components/WebCard.astro";
     title="逻辑验证漫游指南"
     url="https://github.com/Lean-zh/LoVe-zh"
   />
+  <WebCard title="Rocq 参考手册" url="https://rocq-prover.org/refman/" />
+  <WebCard title="Lean 参考手册" url="https://lean-lang.org/doc/reference/" />
 </ResourceGrid>
 
 本课程推荐两套教材，可以自行选择。
 
 - 《软件基础》使用 Rocq 语言。课程相对更加成熟，有纸质印刷的英文版，但中文翻译只有电子文档。
 - 《逻辑验证漫游指南》使用 Lean 语言。语言和课程本身都在高速迭代，因此没有纸质书籍，但社区里有可使用的中文翻译。
+
+《软件基础》的内容远比《逻辑验证漫游指南》更多。如果选择读前者，那么只需重点读第一卷整卷和第二卷的霍尔逻辑、操作语义相关章节即可。
 
 ### 游戏开发
 
