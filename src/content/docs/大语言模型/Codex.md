@@ -35,6 +35,40 @@ brew install --cask codex
 npm install -g @openai/codex
 ```
 
+## 配置
+
+Codex 配置相当多，而且目前还在高速迭代，建议阅读 [官方文档](https://learn.chatgpt.com/docs)。
+
+的配置已公开在 [Github](https://github.com/Juemuren/.dotfiles/tree/main/codex)，可以用作参考。
+
+在 https://learn.chatgpt.com/docs/config-file/config-reference 上可以查询所有配置项的含义。
+
+另外，非常建议在安装 `codex` 后运行一次 `codex doctor`。这个命令会报告当前检测到的各种问题，然后可以按严重程度逐个修复。
+
+### TUI
+
+可以在 Codex CLI 的交互会话中输入命令修改 TUI 配置
+
+- `/statusline` 修改底部状态栏
+- `/title` 修改终端标题
+- `/theme` 修改语法高亮主题
+- `/pets` 修改宠物
+
+也可以通过修改 `~/.codex/config.toml` 文件调整 TUI 配置
+
+### Permissions
+
+目前根据 https://learn.chatgpt.com/docs/permissions 的描述，Codex 有两种沙箱权限模型，并且互相冲突，只能选择其一
+
+- `sandbox_mode` + `sandbox_workspace_write` 比较简单，功能有限，属于旧模型
+- `default_permissions` + `permissions` 较为复杂，但功能更丰富，属于新模型
+
+建议选择新模型，因为其中包含了非常多实用的功能
+
+- 可以自定义权限配置，然后通过 `/permissions` 命令切换。旧模型并不支持自定义权限配置
+- 可以细粒度的给目录或文件设置 `deny` / `read` / `write` 三种权限。旧模型其实只有可写与不可写两种权限
+- 可以限制命令行工具对网络的访问。旧模型并没有相关功能
+
 ## 使用
 
 可以运行 `codex --help` 查看详细的帮助
