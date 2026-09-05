@@ -15,7 +15,7 @@ title: Rust
 scoop install rustup
 ```
 
-然后通过 rustup 获取工具链
+然后通过 `rustup` 获取工具链
 
 ```sh
 # GNU ABI
