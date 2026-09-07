@@ -105,10 +105,10 @@ git clone <url>
 # 创建并切换到新分支
 git branch <name>
 git switch <name>
-# 从远程仓库的指定分支中拉取
-git pull <repository-name> <branch-name>
-# 推送到远程仓库的指定分支中
-git push <repository-name> <branch-name>
+# 从远程仓库指定分支中拉取修改到本地仓库的对应分支
+git pull <repository> <branch>
+# 将本地仓库指定分支的修改推送到远程仓库的对应分支
+git push <repository> <branch>
 ```
 
 ### 基本设置
@@ -236,4 +236,78 @@ VSCode 有更易阅读 diff 视图。由于 VSCode 提供了命令行工具 [cod
 
 ```sh
 git difftool <commit-hash> <commit-hash>
+```
+
+### 远程仓库
+
+git 可以给远程仓库设置别名。运行 `git clone` 后远程仓库会拥有默认的别名 `origin`。可以添加别的远程仓库以及对应的别名，也可以修改已有仓库的别名
+
+```sh
+# 查看所有远程仓库的地址和别名
+git remote -v
+# 添加远程仓库
+git remote add <name> <url>
+# 修改远程仓库的别名
+git remote rename <old-name> <new-name>
+```
+
+在 GitHub 等平台协作时，通常习惯把自己 fork 的仓库设为 `origin`，而原仓库设为 `upstream`。如果此前已经 clone 了原仓库，那么可以修改原仓库的别名，然后添加自己的仓库
+
+```sh
+# 把原来的 origin 重命名为 upstream
+git remote rename origin upstream
+# 把自己的仓库设为 origin
+git remote add origin <url>
+```
+
+推送和拉取的时候，可以直接使用别名，而不必填写完整的 url
+
+```sh
+# 把 origin 仓库 main 分支的修改拉取到本地仓库
+git pull origin main
+# 把本地仓库 main 分支的修改推送到 origin 仓库
+git push origin main
+```
+
+可以修改仓库中的 git 配置，让 `git pull` 和 `git push` 使用默认的仓库和分支
+
+```sh
+# 默认为 origin 仓库的 main 分支和本地仓库的 main 分支
+git branch --set-upstream-to=origin/main main
+```
+
+### 远程跟踪分支
+
+`git pull` 会把远程仓库中的修改合并到本地仓库的对应分支中。但有些时候我们只想知道远程仓库的状态，不想修改本地分支，这时就需要远程跟踪分支：把远程仓库的状态缓存到本地仓库中
+
+```sh
+# 更新对应远程仓库的跟踪分支
+git fetch <repository>
+# 列出所有跟踪分支
+git branch --remotes
+```
+
+然后我们可以手动把修改合并到本地分支中
+
+```sh
+# 把 upstream 的 main 分支合并到本地的 main 分支
+git switch main
+git merge upstream/main
+# 或者使用 rebase
+git rebase upstream/main
+```
+
+远程跟踪分支毕竟只是缓存，而缓存就总会有失效的时候——比如本地仓库中还有对应分支的跟踪，但这个分支已经在远程仓库中删除了。此时可以用多种方式清理跟踪分支
+
+```sh
+# 更新后自动清理失效的跟踪分支
+git fetch --prune <repository>
+# 只清理失效的跟踪分支，不更新跟踪分支
+git remote prune <repository>
+```
+
+也可以修改 git 配置，让 `git fetch` 会默认清理失效的跟踪分支
+
+```sh
+git config --global fetch.prune true
 ```
