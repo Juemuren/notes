@@ -1,5 +1,5 @@
 ---
-title: Ruby
+title: Zig
 ---
 
 ## 环境搭建
@@ -9,9 +9,9 @@ title: Ruby
 ### 获取工具链
 
 ```sh
-mise use -g ruby
+mise use -g zig
 ```
 
 ### 编辑器集成
 
-VSCode 上的扩展 [Ruby LSP](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-lsp)
+安装官方的 VSCode 扩展 [Zig Language](https://marketplace.visualstudio.com/items?itemName=ziglang.vscode-zig)

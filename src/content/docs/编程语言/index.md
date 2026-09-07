@@ -85,7 +85,7 @@ title: 编程语言
 - [CUDA](CUDA.md) 严格地说 CUDA 不是一门语言，而是由 NVIDIA 推出的一个异构编程模型，不过也可以把它当成一个 C++ 方言。CUDA 扩展了 C++ 的语法，可以声明哪些代码应该在 GPU 上运行。
 - [Rust](Rust.md) 更现代的 C++，有更合理的、更统一的工具链，能够从语法层面保障内存/并发安全，可以在编译期发现大多数错误。尽管语法复杂，学习曲线陡峭，但我仍然认为 Rust 是充满前景的。
 - [Go](Go.md) 由 Google 设计并开源的语言，能够简单地编写并发程序，可作为大多数后端项目的首选。很多云原生基础设施也都是用 Go 写的，比如 Docker、Kubernetes。
-- Zig 现代版的 C 语言，但还没发布稳定版本。
+- [Zig](Zig.md) 现代版的 C 语言，但还没发布稳定版本。
 - Swift 现代版的 Object-C，Apple 钦定的 iOS/macOS 原生开发语言。
 - V 语法类似 Go，但编译时将 C 作为自己的后端，和早期的 C++ 一样。目前还没发布稳定版本。
 - [Haskell](Haskell.md) 纯函数式语言，相比于工程项目更适合学术研究。
@@ -96,7 +96,7 @@ title: 编程语言
 - [Java](Java.md) 面向对象语言，依赖 Java 虚拟机。
 - Kotlin 现代版的 Java，Google 钦定的 Android 原生开发语言。同样依赖 JVM，尽管可以编译成机器码，但这一特性目前还是实验性的。
 - Erlang 函数式语言，比起 Haskell 更注重实用性，依赖 BEAM 虚拟机。
-- Elixir 现代版的 Erlang，同样依赖 BEAM 虚拟机。
+- [Elixir](Elixir.md) 现代版的 Erlang，同样依赖 BEAM 虚拟机。
 
 ### 解释型
 

@@ -9,8 +9,7 @@ title: Java
 ### 获取工具链
 
 ```sh
-# 使用最新版的 java
-mise use -g java@latest
+mise use -g java
 ```
 
 ### 编辑器集成

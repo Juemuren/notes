@@ -9,8 +9,7 @@ title: Go
 ### 获取工具链
 
 ```sh
-# 使用最新版的 go
-mise use -g go@latest
+mise use -g go
 ```
 
 ### 编辑器集成
