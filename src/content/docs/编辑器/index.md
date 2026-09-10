@@ -69,7 +69,6 @@ flowchart LR
 
 - [VSCode](VSCode.md) 免费开源，轻量灵活，支持非常高程度的自定义，可以通过扩展达到类似 IDE 的效果，且对远程开发、AI 编程、冷门语言等支持度很高。我现在所有的项目都使用 VSCode 编写代码，包括 C/C++、Python、Web、Julia、Go、Rust、Verilog、Godot 甚至是 Markdown、Tex 等类型。
 - Zed 类似 VSCode，不过使用 Rust 实现，因此速度更快，但也导致无法重用 VSCode 的扩展生态。Zed 自己的扩展生态正在迅速发展中。
-- [Jupyter](Jupyter.md) 某种程度上也算编辑器，但功能远远超过了一般的编辑器，对它的最好定义也许是 _交互式编程笔记本_。Jupyter 更适合学习、探索，不太适合大型工程项目。Jupyter 基于 Web 技术，许多编辑器都可以借助扩展实现对 Jupyter 的支持。
 
 ### TUI
 
