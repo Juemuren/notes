@@ -46,9 +46,24 @@ MSYS 提供了 UCRT / MINGW / CLANG 多种环境
 
 #### VS
 
-<!-- TODO 似乎 VS 支持 CLI 安装了，可以修改一下 -->
+如果需要安装 VS 的话，建议只安装 Visual Studio Build Tools。编辑器仍然使用 VSCode。
 
-如果需要安装 VS 的话，建议只安装生成工具，然后使用 VSCode 作为编辑器。在 [下载页面](https://visualstudio.microsoft.com/downloads/) 找到 `Visual Studio 2022 生成工具`，安装工具时勾选 `使用 C++ 的桌面开发`。右侧选项中可以先只保留 `MSVC` 和 `Windows SDK`，到时候缺什么再补什么就行。
+现在已经可以通过 `winget` 自动安装 VS 了。下面的命令只安装 MSVC 和 Windows SDK，并且尽可能减少了需要确认的弹窗
+
+```pwsh
+winget install `
+    --id Microsoft.VisualStudio.BuildTools `
+    --exact `
+    --source winget `
+    --disable-interactivity `
+    --silent `
+    --accept-source-agreements `
+    --accept-package-agreements `
+    --override "--quiet --wait --norestart --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows11SDK.26100"
+```
+
+- 如果需要添加组件，只需在 `--override` 的参数中写几个类似的 `--add` 就行；也可以把 `--override` 改为 `"--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"`，这会安装所有推荐的组件。
+- 如果需要修改安装目录，可以在 `--override` 里添加 `--installPath "D:\VS"` 参数。
 
 VS 为了不污染系统环境，需要进入编译环境后才能使用编译器。我不推荐去修改系统的 PATH 变量，而是使用官方提供的脚本进入编译环境。这个脚本一般在 VS 安装目录的 `Common7\Tools\Launch-VsDevShell.ps1` 下。当然，除了使用脚本，官方还提供了快捷方式，且配置了 `Windows Terminal` 的 profile
 
@@ -161,7 +176,7 @@ cl -?
 
 需要安装扩展 [Clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
 
-此时打开一个 C/C++ 文件，如果没有 PATH 里没有二进制程序 `clangd` 的话，扩展会弹窗要求下载。只要点击按钮即可开始下载。下载完成后就可以使用语言服务了。
+此时打开一个 C/C++ 文件，如果 PATH 里没有二进制程序 `clangd` 的话，扩展会弹窗要求下载。只要点击按钮即可开始下载。下载完成后就可以使用语言服务了。
 
 ## 命令行工具
 
