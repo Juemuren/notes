@@ -6,83 +6,101 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## 简介
 
-Jupyter 是个交互式开发环境，由 **前端**、**后端**、**内核** 三部分组成。前端提供了可交互的界面，并能够进行渲染；后端负责处理前端的请求，并和内核通信；内核可以实际执行代码，并提供了特殊命令。
+一个完整的 Jupyter 由 Notebook、Editor、Kernel 三部分组成。
+
+- Notebook 即笔记本是一个 JSON 文件，保存了文档、代码和运行结果。
+- Kernel 即内核负责执行代码，并保存着语言的运行时状态。
+- Editor 即编辑器负责修改 JSON 文件并与内核通信。
+
+因此，完整的 Jupyter 就是一个开发环境。
+
+## 原理
+
+Notebook 是一个持久化 JSON 文档，编辑器对其进行解析、渲染和修改。
+
+Kernel 是一个更高级的、有状态的、可远程通信的 REPL。内核会持续运行，是独立进程，保存语言运行时状态，并通过 Jupyter 消息协议提供代码执行和交互能力。
+
+Editor 是一个 Notebook 文档编辑器，同时也是 Kernel 的客户端。编辑器根据 Jupyter 消息协议，把 `*.ipynb` 里的代码块作为请求发给内核，再把内核返回的消息转换为代码块的输出，最后写入时序列化为 JSON。
+
+因此，Kernel 是语言的临时状态，Notebook 是持久化的文档，而 Editor 在二者之间架起桥梁。
 
 ```mermaid
-graph LR
-    A[前端]
-    B[后端]
-    C[内核]
-    A --请求--> B
-    B --转发结果--> A
-    B --转发请求--> C
-    C --结果--> B
+flowchart LR
+    Editor["Editor"]
+    Editor -->|读取和写入| Notebook["Notebook"]
+    Editor -->|发起请求并得到结果| Kernel["Kernel"]
 ```
 
 ## 功能
 
 ### 编程笔记本
 
-Jupyter 使用特殊的 `.ipynb` 文件格式，可以将文档、代码等放在一起展示
+Jupyter 使用特殊的 `.ipynb` 文件格式，可以将文档、代码、运行结果等放在一起展示。具体的渲染效果和编辑器有关。
 
-- 文档是基于 _Markdown_ 的，**渲染效果和前端有关**
-- 代码支持使用不同的语言，需要 **安装对应的内核**
+- 文档使用 Markdown 格式，运行结果中不仅包含文本输出，还可能有图片、可交互组件等内容。
+- 代码支持不同的语言，编辑器可以直接渲染，但执行需要分别安装对应的内核。
 
-> [!note] Jupyter 的发展历史
-> 最早 Jupyter 叫做 `IPython Notebook`，只支持 `python`，这也就是为什么文件扩展名为 `.ipynb`。后来改进了架构，分离了后端和内核，可以支持更多的语言，比如 `Julia` 和 `R`，这便是新名字 `Ju(Julia)pyt(Python)er(R)` 的由来。而现在支持的语言越来越多，甚至连 `C++` 也能支持了（不过目前在 Windows 平台无法使用，且 **VSCode** 中 **C/C++** 扩展的 _intelliSense_ 会失效）
+:::note[Jupyter 的发展历史]
+
+最早 Jupyter 叫做 `IPython Notebook`，只支持 `python`，这也就是为什么文件扩展名为 `.ipynb`。后来改进了架构，分离出了内核，可以支持更多的语言，比如 `Julia` 和 `R`，这便是新名字 `Ju(Julia)pyt(Python)er(R)` 的由来。
+
+:::
 
 Jupyter 的这种笔记本格式可以把代码、文本、图片、公式、图表作为一个复合文档统一展示。别人打开笔记本时可以看到你记录的完整分析过程、所有源代码和全部运行结果，也可以简单地重新运行部分代码看看是否能够复现。
 
-> [!note] ipynb 格式的细节
-> `ipynb` 本质上是一个 JSON 文件，其中包含大量由程序解析的字段，直接在文本上阅读和修改很不方便。因此阅读/修改 `ipynb` 文件通常使用特定的工具，它包含了解析、渲染、编辑等功能，让这种复杂的文件变得易于使用。
-
-当然了，这种笔记本格式也可以使用工具（比如 `nbconvert`/`jupytext`/`pandoc`）导出为别的格式，包括但不限于 _HTML_/_PDF_，从而更方便分享。
+这种笔记本格式也可以使用工具（比如 `nbconvert`/`jupytext`/`pandoc`）导出为别的格式，包括但不限于 HTML / PDF。
 
 ### 远程开发
 
-Jupyter 由于其前后端分离的架构设计，天然适合远程开发，这使得其在人工智能和科学计算领域非常流行。这些领域非常依赖机器性能，但没有人愿意抱着厚重机器到处跑。但有了 Jupyter，只需用轻薄本连上一个强大的远程服务器，就可以愉快地开发了。
+Jupyter 由于编辑器和内核分离的架构设计，天然适合远程开发。这使得 Jupyter 在人工智能和科学计算领域非常流行。这些领域非常依赖机器性能，有了 Jupyter 后只需用轻薄本连上一个强大的远程服务器，就可以愉快地开发了。
 
-### 交互式开发
+### 学习和探索
 
-Jupyter 还代表了一种新的编程方式——探索式编程，且同时拥有 _REPL_ 和 _直接运行整个文件_ 的优点。代码是写在一个个块里的，你可以单独执行一个块的代码，也可以一次执行所有块的代码。甚至，配合一些工具，你还可以给块分组，然后单独执行某个组里的代码。
+Jupyter 代表了一种新的编程方式——探索式编程。这可以看作一种更高级的 REPL。代码写在一个个代码块里，可以单独运行一个代码块，也可以一次运行多个选定的代码块。而这些代码运行后，内核保存着运行时的状态，再运行新的代码块不需要重新启动进程，可以在之前的状态上继续。
 
-比如对于机器学习任务，你可以只运行一小段数据处理代码，看看结果是否正确；然后运行一段可视化代码，看看整体的数据分布；接着尝试一些参数和模型，进行简单的训练；最后看看训练的效果，如有需要再回去调整。上述所有步骤都不需要从头开始重新执行文件，这种即时反馈极大地提升了探索和调试的效率。
+比如对于机器学习任务，需要先导入大型库和巨量数据集，然后才能定义模型并设定一些参数进行训练，最后还要根据训练的效果返回去调整参数或模型。Jupyter 可以让调整的时候，不用重新导入库和数据集。这极大地提升了探索和调试的效率。
 
-Jupyter 还提供了一些魔法命令，有很多实用的功能，并且支持直接运行外部命令。这也使得 Jupyter 不仅仅是一个编辑器，而成为了一个集成开发环境。
+一些 Jupyter 内核还提供了魔法命令，包含很多实用功能，比如直接运行外部命令。这使得 Jupyter 不仅仅是一个编辑器，而成为了一个集成开发环境。
 
 ## 安装
 
-Jupyter 为了远程开发和多语言支持而设计了复杂的架构。因此，想要本地使用 Jupyter，不仅要有前端，还要有后端和内核。当然，如果你只进行远程开发，那么本地有前端就行了，后端和内核都可以运行在别的机器上。
+Jupyter 为了远程开发和多语言支持而设计了复杂的架构。因此，想要本地使用 Jupyter，要同时有编辑器和内核。当然，如果只进行远程开发，那么本地有编辑器就行了，内核可以运行在别的机器上。
 
-- 前端可以直接使用 **浏览器**，此时界面会取决于后端。或者也可以使用支持 Jupyter 的 **编辑器**，比如 `VSCode`（需要下载 [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 扩展）。
-- 后端可以选择 `jupyterlab` 或 `notebook`，两者都可以通过 `pip` 安装，jupyterlab 可能更好一点。`VSCode` 的扩展实现了后端的主要功能，因此可以不额外安装后端。
-- 内核有很多种，不同语言自然有不同的内核，一种语言也可能有多种内核。python 的内核一般用 `ipykernel`，通过 `pip install ipykernel` 就可以安装。你可以在 [这里](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels) 找到目前能用的所有内核。
+### 安装编辑器
+
+如果使用 `VSCode`，那么需要下载 [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 扩展。
+
+如果使用 `JupyterLab`，那么可以通过 `pip install jupyterlab` 安装。
+
+### 安装内核
+
+内核根据语言选择。Python 的内核一般用 `ipykernel`，可以通过 `pip install ipykernel` 安装。
+
+可以在 https://github.com/jupyter/jupyter/wiki/Jupyter-kernels 上找到目前能用的所有内核。
 
 ## 使用
 
-> [!note] 阅读文档
-> 不同的前端之间使用方法可能差异很大，请阅读官方文档获得更详细的说明。
-
 ### VSCode
 
-使用 VSCode 作为前端可以参考 [官方文档](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)，里面有很详细的使用方法说明。
+使用 VSCode 作为编辑器可以参考 [官方文档](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)，里面有很详细的使用方法说明。
 
-### Browser
+### JupyterLab
 
-如果你使用浏览器作为前端，那么你需要本地启动一个后端服务器。运行命令后会自动在浏览器中打开给定的 **URL**。
+使用 JupyterLab 需要启动或连接一个 JupyterLab 服务。本地使用时可以在项目根目录运行命令启动服务器。
 
 ```sh
-# notebook
-jupyter notebook
-# jupyterlab
 jupyter lab
 ```
 
+服务器启后会自动在浏览器中打开给定的 URL。
+
+后续的使用方法可以参考 [官方文档](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html)
+
 ### 导出
 
-导出可以使用 `nbconvert`，通过 `pip install nbconvert` 安装。_VSCode_ 的导出实际上就使用了 `nbconvert`
+导出可以使用 `nbconvert`，通过 `pip install nbconvert` 安装。VSCode 的导出实际上就使用了 `nbconvert`
 
-`nbconvert` 支持导出为多种格式，不过最常用的还是 _HTML_ 和 $\LaTeX$。而 _PDF_ 可由前者进一步处理得到。
+`nbconvert` 支持导出为多种格式，不过最常用的还是 HTML 和 LaTeX。而 PDF 可由二者进一步处理得到。
 
 #### HTML
 
@@ -93,32 +111,36 @@ jupyter nbconvert example.ipynb --to html --output export
 
 一些常用的选项
 
-- `--template` 指定模板。内置的 _HTML_ 模板只有 `basic`/`lab`/`classic`，可以自定义模板或下载社区里的模板。
+- `--template` 指定模板。HTML 导出可使用 `lab` / `classic` 等内置模板，也可以自定义模板或下载社区里的模板。
 - `--no-prompt` 不保留提示符
-- `--clear-output` 清除输出
+- `--clear-output` 清除代码块输出，同时也会修改原笔记本。如果只需要在导出的文档中隐藏代码块输出，可以使用 `--TemplateExporter.exclude_output=True`。
 
-之后可以用浏览器的打印功能，将 `html` 文件转为 _PDF_。如果偏爱脚本也可以用 [无头浏览器](../网络/Chrome.md#无头模式) 来打印
+之后可以用浏览器的打印功能，将 `*.html` 文件转为 PDF。如果偏爱脚本也可以用 [无头浏览器](../网络/Chrome.md#无头模式) 来打印
 
-> [!caution] HTML 的排版缺陷
->
-> `lab` 模板的 HTML 在打印为 PDF 后，会截断非常长的代码行。
->
-> 并且由于 HTML 不是专为排版设计的标记语言，因此很多时候排版效果并不好。如果比较在意排版，建议使用 LaTeX。
+:::caution[HTML 的排版缺陷]
+
+`lab` 模板的 HTML 在打印为 PDF 后，会截断非常长的代码行。
+
+并且由于 HTML 不是专为排版设计的标记语言，因此很多时候排版效果并不好。如果比较在意排版，建议使用 LaTeX。
+
+:::
 
 #### LaTeX
+
+导出为 LaTeX 还需要安装 [Pandoc](https://pandoc.org/installing.html)。
 
 ```sh
 # 将 example.ipynb 导出为 export.tex
 jupyter nbconvert example.ipynb --to latex --output export
 ```
 
-如果原 `ipynb` 文件中有图片输出，则上述命令会创建一个文件夹 `export_files` 来保存图片。
+如果原 `ipynb` 文件中有图片等非文本输出，则上述命令会创建一个文件夹 `export_files` 来保存这些文件。
 
-$\LaTeX$ 内置的模板只有 `base`/`article`/`report`，可以自定义模板或下载社区里的模板。
+LaTeX 导出默认使用 `latex` 模板，可以自定义模板或下载社区里的模板。
 
 :::tip[LaTeX 的中文配置和效果改善]
 
-由于 LaTeX 不像 HTML 天然支持中文，并且内置的模板不忠于 Jupyter 笔记本的实际渲染效果，因此建议下载社区的模板或自己修改模板。
+由于 LaTeX 不像 HTML 那样天然支持中文，并且内置的模板和 Jupyter 笔记本的实际渲染内容有所差异，因此建议下载社区的模板或自己修改模板。
 
 我目前的做法是魔改 [nb_pdf_template](https://github.com/t-makaro/nb_pdf_template) 模板
 
@@ -133,17 +155,21 @@ $\LaTeX$ 内置的模板只有 `base`/`article`/`report`，可以自定义模板
 
 :::
 
-之后就是编译 `tex` 文件得到 _PDF_，这要求本机已安装 $\TeX$ 环境
+之后就是编译 `tex` 文件得到 PDF，这要求本机已安装 TeX 环境
 
 ```sh
 xelatex export.tex --quiet
 ```
 
-> [!caution] LaTeX 的一些问题
->
-> 原 `ipynb` 中引用的 _SVG_ 文件似乎没有被嵌入编译后的 _PDF_。目前我的做法就是手动将 _SVG_ 转为 _PNG_，而 `ipynb` 中只引用后者。
+:::caution[LaTeX 的一些问题]
 
-用 `nbconvert` 直接将 `ipynb` 转为 _PDF_，其实就是把转为 $\LaTeX$ 和编译 $\LaTeX$ 的步骤结合起来了。
+我使用 LaTeX 编译得到的 PDF 里，无法包含原 `ipynb` 中引用的 SVG 文件。
+
+目前我的做法就是手动将 SVG 转为 PNG，而 `ipynb` 中只引用后者。
+
+:::
+
+用 `nbconvert` 直接将 `ipynb` 转为 PDF，其实就是把转为 LaTeX 和编译 LaTeX 的步骤结合起来了。
 
 #### Python
 
@@ -154,7 +180,7 @@ xelatex export.tex --quiet
 jupytext --to py notebook.ipynb
 ```
 
-`jupytext` 的转换是无损的，也就是说 `jupytext` 可以将转换后的 `py` 反向还原为 `ipynb`，除了输出被清空以外，新的 `ipynb` 和原来的完全相同。
+这种转换会丢失代码块输出和部分元数据，但 `jupytext` 允许把 `py` 反向转换回 `ipynb`。
 
 #### Markdown
 
@@ -165,13 +191,13 @@ jupytext --to py notebook.ipynb
 jupytext --to md notebook.ipynb
 ```
 
-这一转换同样是无损的。
+这种转换同样会丢失代码块输出和部分元数据，且 `jupytext` 同样支持反向转换回 `ipynb`。
 
 ### 导入
 
 除了可以将 `ipynb` 导出为别的格式外，也可以把别的格式转换为 `ipynb` 文件。
 
-前面已经提到 `jupytext` 的转换是无损的，自然可以将 `md`/`py` 文件转为 `ipynb` 文件
+前面已经提到 `jupytext` 可以将 `md` / `py` 文件转为 `ipynb` 文件。这一转换虽然不是无损的，但 Markdown 文档和 Python 代码都会被完整保留。
 
 ```sh
 # 将 notebook.py 转为 notebook.ipynb
@@ -180,19 +206,28 @@ jupytext --to notebook notebook.py
 jupytext --to notebook notebook.md
 ```
 
-如果将 `md`/`py` 作为源文件，而将 `ipynb` 作为构建产物，那么前者确实更好维护，但通常也会失去后者即时探索的流畅性。
+如果想只将 `md`/`py` 提交版本控制系统从而方便查看变更，但同时又想保留 `ipynb` 即时探索的流畅性，那么可以用 [Jupytext 的配对功能](https://jupytext.org/using/paired-notebooks/) 同步文本文件与 `ipynb`。
 
-至于维护 `md` 更好还是维护 `py` 更好则因人而异。我的一个 `ipynb` 文件原始 JSON 有 2000 多行，转为 `md` 和 `py` 后都只剩下了 500 行左右
+至于选择 `md` 更好还是 `py` 更好则因人而异。我的一个 `ipynb` 文件原始 JSON 有 2000 多行，转为 `md` 和 `py` 后都只剩下了 500 行左右
 
-- 转为 `py` 后可以直接 `python notebook.py` 运行脚本，但所有的 markdown 内容都写在注释里，编辑器无法高亮
-- 转为 `md` 后所有 python 脚本在代码块里，编辑器能够高亮，但没法通过 `python notebook.md` 直接运行。不过能使用 `jupytext --to notebook --execute notebook.md` 来执行并转换这个 `md` 文件。
+- 转为 `py` 后可以直接使用 `python notebook.py` 运行代码，但所有的 markdown 内容都写在注释里，编辑器不会高亮 markdown，且无法用 markdown 渲染器进行阅读。
+- 转为 `md` 后所有 python 脚本都在代码块里，编辑器能够同时高亮 markdown 和 python，且可以使用 markdown 阅读器，但没法通过 `python notebook.md` 直接运行代码。不过能使用 `jupytext --to notebook --execute notebook.md` 来执行并转换这个 `md` 文件。
 
-> [!tip] Quarto
-> 若目的仅是生成文档，完全不需要即时探索，则可以了解一下 [Quarto](../文档/Quarto.md)。这是一个开源的科技出版系统，用和 `md` 一样简洁的 `qmd` 作为源文件，只在构建时运行代码，并可导出为多种文档格式。
+:::tip[Marimo 与 Quarto]
+
+如果主要目的是编写程序，那么可以了解一下 Marimo，这是一个响应式的 Python 笔记本。
+
+Marimo 直接以 `.py` 格式保存笔记本，并以此提供 Python 代码、Markdown 文档和运行结果混排的交互界面，不需要像 Jupytext + Jupyter 那样同步两种文件。并且 Marimo 还能自动重新运行需要的代码，只需要让代码符合特定的依赖规则。
+
+如果主要目的是生成文档，那么可以了解一下 [Quarto](../文档/Quarto.md)，这是一个开源的科技出版系统。
+
+Quarto 使用类似 `md` 的 `.qmd` 作为源文件，可在构建时运行代码，并导出为 HTML、PDF 等多种格式，不需要先通过 Jupytext 把 Markdown 转为 `ipynb` 再用 Jupyter 运行代码和导出文档。并且 Quarto 还能自动给图表编号、生成交叉引用和参考文献，也更方便把多篇笔记合成网站或书籍。
+
+:::
 
 ### 命令行
 
-Jupyter 的命令行工具除了可以启动后端服务器、进行导出外，还有别的功能。
+Jupyter 的命令行工具除了可以启动服务器、进行导出外，还有别的功能。
 
 比如 `jupyter kernelspec list` 可以列出当前能用的所有内核。
 
