@@ -42,6 +42,8 @@ MSYS 提供了 UCRT / MINGW / CLANG 多种环境
 
 详细的区别请阅读 https://www.msys2.org/docs/environments/
 
+另外，如果不需要完整 MSYS 环境的话，也可以使用 `scoop install mingw` 安装 GCC 工具链。
+
 :::
 
 #### VS
@@ -79,7 +81,7 @@ scoop shim add vs 'path\to\vs\Common7\Tools\Launch-VsDevShell.ps1' '--' -Arch am
 
 LLVM 项目在 Windows 上发布的 CLANG 工具链默认会链接到 MSVC 的 C++ 库，因此需要先安装 MSVC 才能使用。
 
-可以通过 `scoop install llvm` 获取 CLANG 编译器。使用 CLANG 编译程序时可以不进入 VS 的编译环境。
+可以通过 `scoop install llvm` 获取 CLANG 工具链。使用 CLANG 编译程序时可以不进入 VS 的编译环境。
 
 :::
 
@@ -106,7 +108,7 @@ LLVM 项目在 Windows 上发布的 CLANG 工具链默认会链接到 MSVC 的 C
 
 如果使用从 MSYS 获取的工具链，请先参考 [MSYS VSCode Terminal](../环境管理器/MSYS.md#vscode-terminal) 配置 VSCode 集成终端。
 
-作为示例，按 `Ctrl + Shift + P`，输入 `Preferences: Open User Settings (JSON)` 并点击回车，然后在 `settings.json` 中加入如下配置，并把 `${env:MSYS_ROOT}` 换成本机 MSYS 的安装路径
+作为示例，按 `Ctrl + Shift + P` 输入 VSCode 命令 `Preferences: Open User Settings (JSON)`，然后在打开的配置文件 `settings.json` 中加入如下配置，并把 `${env:MSYS_ROOT}` 换成本机 MSYS 的安装路径
 
 ```json
 {
@@ -124,7 +126,7 @@ LLVM 项目在 Windows 上发布的 CLANG 工具链默认会链接到 MSVC 的 C
 }
 ```
 
-最后，按 `Ctrl + Shift + P`，输入 `Create New Terminal (With Profile)` 并点击回车，打开刚才配置的终端并运行
+最后，再输入 VSCode 命令 `Create New Terminal (With Profile)`，打开刚才配置的终端并运行
 
 ```sh
 gcc --version
@@ -177,6 +179,27 @@ cl -?
 需要安装扩展 [Clangd](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
 
 此时打开一个 C/C++ 文件，如果 PATH 里没有二进制程序 `clangd` 的话，扩展会弹窗要求下载。只要点击按钮即可开始下载。下载完成后就可以使用语言服务了。
+
+#### 配置图形化调试
+
+现在其实已经可以在终端里使用 `gdb ./main` / `lldb ./main` 命令来调试程序了。但如果想通过图形化的方式来调试代码，那么还需要进行配置。
+
+首先需要安装扩展 [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
+
+然后根据扩展的 [使用手册](https://github.com/vadimcn/codelldb/blob/master/MANUAL.md) 配置调试任务。
+
+作为示例，在 `.vscode/launch.json` 文件中添加如下配置，并把 `build/main` 换成需要调试的二进制程序路径
+
+```json
+{
+    "name": "Launch",
+    "type": "lldb",
+    "request": "launch",
+    "program": "${workspaceFolder}/build/main"
+}
+```
+
+然后在源代码中需要的地方打上断点，接着按 `Ctrl + Shift + D` 或者点击左侧的运行与调试按钮，在上方选择刚才配置的任务并点击运行按钮，即可开始调试。
 
 ## 命令行工具
 

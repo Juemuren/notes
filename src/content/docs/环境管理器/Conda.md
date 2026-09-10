@@ -41,15 +41,6 @@ Conda 通过修改 **PATH** 来激活不同的虚拟环境，因此需要与 She
 
 在 Windows 上使用默认选项安装完 _Miniforge_ 后应该会有一个快捷方式，按下 `win` 后输入 `miniforge` 就能找到。该快捷方式会启动一个激活了 `base` 环境的 Shell，输入以下命令即可与 Shell 集成
 
-> [!tip] 找不到快捷方式
-> 如果你没有这个快捷方式，可以使用以下命令，效果是一样的
->
-> ```pwsh
-> # 将 path\to\miniforge3 替换为你的安装路径
-> path\to\miniforge3\condabin\conda.bat init powershell
-> path\to\miniforge3\condabin\mamba.bat shell init
-> ```
-
 ```sh
 # conda 的 powershell 集成
 conda init powershell
@@ -59,12 +50,30 @@ conda init bash
 mamba shell init
 ```
 
-> [!caution] 启动速度
-> 启用 Shell 集成后，Shell 的启动文件中会添加上一些命令。
->
-> 如前所述，`conda` 由于使用 **Python** 实现，速度比较慢，执行这些命令要很长时间，会拖慢 Shell 的启动。我在自己的机器上测试，conda 集成后每次启动 Shell 大概要多花费 _2_ 秒左右；而 `mamba` 由于用 **C++** 实现，会快很多，大概只花了 _0.2_ 秒。因此 `conda` 和 `mamba` 二者只需集成一个，并且最好选择后者，这样能节省一点时间。
+::tip[找不到快捷方式]
 
-重启 shell 并测试是否成功
+如果没有这个快捷方式，那么可以使用以下命令，效果是一样的
+
+```pwsh
+path\to\miniforge3\condabin\conda.bat init powershell
+path\to\miniforge3\condabin\mamba.bat shell init
+```
+
+:::
+
+启用 shell 集成后，shell 的启动文件中会添加一些命令。此后从任何地方打开的 shell 都可以使用 `conda` / `mamba` 命令了。
+
+`conda` 和 `mamba` 二者只需集成一个，选择喜欢的那个就行。
+
+:::caution[启动速度]
+
+如前所述，`conda` 由于使用 **Python** 实现，速度比较慢，执行这些命令要很长时间，会拖慢 Shell 的启动。
+
+我在自己的机器上测试，conda 集成后每次启动 Shell 大概要多花费 _2_ 秒左右；而 `mamba` 由于用 **C++** 实现，会快很多，大概只花了 _0.2_ 秒。因此 `conda` 和 `mamba` 中建议选择后者，这样能节省一点时间。
+
+:::
+
+重启 Shell 并测试是否成功
 
 ```sh
 conda --version
@@ -92,7 +101,7 @@ mamba config set show_channel_urls true
 
 ```json
 {
-  "python.condaPath": "path\\to\\miniforge3\\condabin\\conda.bat"
+    "python.condaPath": "path\\to\\miniforge3\\condabin\\conda.bat"
 }
 ```
 

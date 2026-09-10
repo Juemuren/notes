@@ -72,32 +72,45 @@ uv add numpy
 >
 > 你也可以参考官方文档 [VSCode Python](https://code.visualstudio.com/docs/python/python-quick-start)
 
-#### 使用解释器
+#### 配置语言服务
 
-需要安装扩展 [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+首先需要安装扩展 [ty](https://marketplace.visualstudio.com/items?itemName=astral-sh.ty)
 
-新建一个 `test.py` 文件，输入 VSCode 命令 `Python: Select Interpreter`，VSCode 会识别到不同的 Conda 环境，请选择正确的那个解释器
+然后就可以使用 Python 语言服务了。
 
-> [!tip] 无法识别 Conda 环境
-> 如果 VSCode 没有识别到 conda 环境的话，你可以参考 [Conda 编辑器集成](../环境管理器/Conda.md#编辑器集成) 来解决
+#### 配置图形化运行
 
-之后就可以在 `.py` 文件的右上角找到运行按钮，此时 VSCode 会调用刚选择的解释器
+现在其实已经可以在终端里输入 `python example.py` 命令来运行代码了。但如果想通过图形化的方式来运行代码，那么还需要进行配置。
 
-#### 使用调试器
+首先需要安装扩展 [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 
-需要安装扩展 [Python Debugger](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
+然后新建一个 `example.py` 文件，输入 VSCode 命令 `Python: Select Interpreter`，然后选择想使用的解释器。
 
-输入 VSCode 命令 `Debug: Add Configuration`，选择 `Python Debugger` 扩展自动生成的配置。
+:::tip[无法识别 Conda 环境]
 
-自动生成了 `launch.json` 文件后，就可以直接点击按钮来调试了。
+如果使用 Conda 安装 Python 且 VSCode 没有识别到 Conda 环境中的解释器，那么需要参考 [Conda 编辑器集成](../环境管理器/Conda.md#编辑器集成) 调整扩展设置。
 
-#### 使用编程笔记本
+:::
+
+之后就可以在 `*.py` 文件的右上角找到运行按钮，此时 VSCode 会调用刚选择的解释器。
+
+#### 配置图形化调试
+
+现在其实已经可以在终端里输入 `python -m pdb example.py` 命令来调试代码了。但如果想通过图形化的方式来调试代码，那么还需要进行配置。
+
+首先需要安装扩展 [Python Debugger](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
+
+然后输入 VSCode 命令 `Debug: Add Configuration`，选择 `Python Debugger` 扩展自动生成的配置。
+
+得到 `.vscode/launch.json` 文件后，就可以点击按钮来调试了。
+
+#### 配置编程笔记本
 
 需要安装扩展 [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
 
-如果需要使用编程笔记本，请确保已经安装了 `ipykernel`。你可以通过 `mamba list` 或 `pip list` 查看是否已经安装。
+如果需要使用编程笔记本，请确保已经安装了 `ipykernel`。可以通过 `pip list` 查看是否已经安装。
 
-新建一个 `test.ipynb` 文件，输入 VSCode 命令 `Jupyter: Select Interpreter to Start Jupyter Server`，选择一个合适的内核，然后就可以使用编程笔记本了。
+新建一个 `example.ipynb` 文件，输入 VSCode 命令 `Jupyter: Select Interpreter to Start Jupyter Server`，选择一个合适的内核，然后就可以使用编程笔记本了。
 
 ## 命令行工具
 
