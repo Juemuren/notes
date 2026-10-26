@@ -297,16 +297,27 @@ git merge upstream/main
 git rebase upstream/main
 ```
 
-远程跟踪分支毕竟只是缓存，而缓存就总会有失效的时候——比如本地仓库中还有对应分支的跟踪，但这个分支已经在远程仓库中删除了。此时可以用多种方式清理跟踪分支
+远程跟踪分支毕竟只是缓存，而缓存就总会有失效的时候——比如本地仓库中还有对应分支的跟踪，但这个分支已经在远程仓库中删除了。
+
+此时可以自动清理所有失效的跟踪分支
 
 ```sh
-# 更新后自动清理失效的跟踪分支
-git fetch --prune <repository>
-# 只清理失效的跟踪分支，不更新跟踪分支
 git remote prune <repository>
 ```
 
-也可以修改 git 配置，让 `git fetch` 会默认清理失效的跟踪分支
+也可以手动删除不需要的跟踪分支
+
+```sh
+git branch --remotes --delete <repository>/<branch>
+```
+
+更好的做法是，在更新时自动清理失效的跟踪分支
+
+```sh
+git fetch --prune <repository>
+```
+
+可以修改 git 配置，让 `git fetch` 默认清理失效的跟踪分支
 
 ```sh
 git config --global fetch.prune true
