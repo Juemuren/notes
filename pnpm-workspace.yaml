@@ -1,3 +1,10 @@
 allowBuilds:
   esbuild: true
   sharp: true
+
+# starlight-site-graph's browser bundle needs a picomatch version without
+# Node's `process` global (see its Getting Started troubleshooting section).
+overrides:
+  picomatch: ^4.0.3
+patchedDependencies:
+  starlight-site-graph@0.5.0: patches/starlight-site-graph@0.5.0.patch

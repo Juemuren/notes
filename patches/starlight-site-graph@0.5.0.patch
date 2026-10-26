@@ -1,0 +1,101 @@
+diff --git a/components/backlinks/Backlinks.astro b/components/backlinks/Backlinks.astro
+index dbf42046014ea8c87befc0d6f03c0e12db21b957..ad524108f50f8d5a2f5bb4604ab0043bd7dd07df 100644
+--- a/components/backlinks/Backlinks.astro
++++ b/components/backlinks/Backlinks.astro
+@@ -10,12 +10,12 @@ let { backlinks, sitemap } = Astro.props;
+ 
+ ---
+ 
+-{backlinks.map((link) => (
+-        <ul class="slsg-backlinks" style="--depth: 0;">
++<ul class="slsg-backlinks" style="--depth: 0;">
++    {backlinks.map((link) => (
+             <li style="--depth: 0;">
+                 <a href={"/" + link } style="--depth: 0;" target="_self" class="slsg-backlink">
+                     <span style="--depth: 0;">{sitemap![link]!.title}</span>
+                 </a>
+             </li>
+-        </ul>
+-))}
++    ))}
++</ul>
+diff --git a/components/backlinks/PageBacklinks.astro b/components/backlinks/PageBacklinks.astro
+index 67f5953ba7f12a359f1db545384354c7d55338f2..e25b08e466a2eaf9b757645676ffc69c37353216 100644
+--- a/components/backlinks/PageBacklinks.astro
++++ b/components/backlinks/PageBacklinks.astro
+@@ -50,8 +50,8 @@ if (showBacklinks === undefined) {
+ 
+ ---
+ 
+-{showBacklinks && backlinks.length > 0 &&
+-	<div class:list={className ?? ""} data-slug={slugWithBase}>
++{showBacklinks &&
++	<div class:list={className ?? ""} data-slug={slugWithBase} hidden={backlinks.length === 0}>
+ 		<slot name="title"/>
+ 		<Backlinks backlinks={backlinks} sitemap={sitemap} />
+ 	</div>
+@@ -77,6 +77,7 @@ if (showBacklinks === undefined) {
+ 					const container = backlinks_container[0]!;
+ 					const slug = container.parentElement?.getAttribute('data-slug') ?? '';
+ 					const entry = sitemap[slug];
++					container.parentElement!.hidden = !entry?.backlinks?.length;
+ 					if (entry?.backlinks) {
+ 						container.innerHTML = '';
+ 						for (const link of entry.backlinks) {
+diff --git a/config/index.ts b/config/index.ts
+index 8a38bbfd4aaf8e635b654de4c3719dad159a8ece..81bbc6701ba0d5bf6ec6c4046c9a41dc8e3ce23f 100644
+--- a/config/index.ts
++++ b/config/index.ts
+@@ -9,6 +9,9 @@ function isObject(item: any): boolean {
+  * Adapted from https://stackoverflow.com/a/37164538/23278914
+  */
+ function deepMerge(target: any, source: any): any {
++	if (target instanceof Map && source instanceof Map) {
++		return new Map([...target, ...source]);
++	}
+ 	let output = Object.assign({}, target);
+ 	if (isObject(target) && isObject(source)) {
+ 		for (const [key, value] of Object.entries(source)) {
+diff --git a/sitemap/build.ts b/sitemap/build.ts
+index 29570001441b8a6143596509fc875c54155facd2..0d317c286c1e607ee2b1324c69591d92afa2770c 100644
+--- a/sitemap/build.ts
++++ b/sitemap/build.ts
+@@ -343,12 +343,15 @@ export class SiteMapBuilder {
+ 				return;
+ 			}
+ 
+-			if (link.startsWith('.')) {
++			if (link.startsWith('/')) {
++				link = stripLeadingSlash(link);
++				if (this.basePath !== '' && !trimSlashes(link).startsWith(this.basePath)) {
++					link = path.join(this.basePath, link);
++				}
++			} else {
+ 				link = path.join(current, link);
+-			} else if (this.basePath !== '' && !trimSlashes(link).startsWith(this.basePath)) {
+-				link = path.join(this.basePath, link);
+ 			}
+-			link = slugifyPath(onlyTrailingSlash(link.split('#')[0]!, this.addTrailingSlash).replace(/\\/g, '/'));
++			link = slugifyPath(onlyTrailingSlash(link.split('#')[0]!.replace(/\\/g, '/'), this.addTrailingSlash));
+ 			if (link !== current) {
+ 				links.add(link);
+ 				return link;
+diff --git a/sitemap/util.ts b/sitemap/util.ts
+index 059db7a01ff34fb66ccbcd6b063d246b406fde52..3bd863855f5d61357a55611362fc6062344132f8 100644
+--- a/sitemap/util.ts
++++ b/sitemap/util.ts
+@@ -7,7 +7,13 @@ export function slugifyPath(path: string) {
+ 	// Properly encode unicode for URLs
+ 	return encodeURI(path
+ 		.split('/')
+-		.map((segment) => slug(segment))
++		.map((segment) => {
++			try {
++				return slug(decodeURIComponent(segment));
++			} catch {
++				return slug(segment);
++			}
++		})
+ 		.join('/'));
+ }
+ 

@@ -3,6 +3,7 @@ import starlight from "@astrojs/starlight";
 import mermaid from "astro-mermaid";
 import { defineConfig } from "astro/config";
 import { starlightKatex } from "starlight-katex";
+import starlightSiteGraph from "starlight-site-graph";
 
 import { markdownProcessor } from "./src/markdown/index.mjs";
 import { ignore, jq } from "./src/syntaxes/index.mjs";
@@ -18,7 +19,15 @@ export default defineConfig({
   integrations: [
     mermaid(),
     starlight({
-      plugins: [starlightKatex()],
+      plugins: [
+        starlightKatex(),
+        starlightSiteGraph({
+          sitemapConfig: {
+            // Use final page URLs so links with Chinese slugs and `base` resolve correctly.
+            pageInclusionRules: ["**/*.html"],
+          },
+        }),
+      ],
       head: [...googleAnalytics],
       expressiveCode: {
         shiki: {
