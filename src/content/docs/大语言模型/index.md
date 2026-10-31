@@ -287,27 +287,22 @@ LLM 的输出要被执行器反序列化成 JSON。但 LLM 输出存在不确定
 - logits 是所有 token 的概率表。约束解码把非法字符的概率归零，然后重新归一化，得到一个新的概率表
 - sampling 是对 token 概率表进行采样。由于新的概率表中只有合法字符拥有非零概率，所以只能采样到合法字符
 
-这种约束解码发生在推理层，模型的权重本身不需要修改。如果使用 LLM provider 提供的 LLM 服务，那么约束解码通常就发生在 provider 的推理服务器上。当请求显式携带了结构化输出的要求时，推理端就会根据给定的 JSON schema 对输出的 token 进行约束解码。最终通过 HTTP 返回的 JSON 就是符合 schema 的 JSON。
+这种约束解码发生在推理层，模型的权重本身不需要修改。如果使用 LLM provider 提供的 LLM 服务，那么约束解码通常就发生在 provider 的推理服务器上。
 
-不过，实际使用场景会更加复杂。因为 Agent 无法根据用户的问题确定请求中要不要携带 schema，推理端也不能根据 Agent 的请求判断是否启用约束解码——这必须依赖 LLM 的输出。
+当请求显式携带了结构化输出的要求时，推理端就会根据给定的 JSON schema 对输出的 token 进行约束解码。最终通过 HTTP 返回的 JSON 就是符合 schema 的 JSON。
 
-通常大语言模型在训练时就会确定一些特殊 token 作为标记，比如
+不过，实际使用场景会更加复杂。因为 Agent 无法根据用户的问题确定请求中要不要携带 schema，所以通常每次请求都会发送可能需要的所有 schema；推理端因此不能仅凭请求中携带了 schema 就启用约束解码，而需要根据 LLM 的生成状态实时判断。
 
-- `<tool_call>...</tool_call>` 表示工具调用
-- `<think>...</think>` 表示思考
+大语言模型在训练时需要学会使用一些特殊 token，比如用 `<tool_call>...</tool_call>` 表示工具调用。推理端于是可以在看到 LLM 输出 `<tool_call>` 后，根据工具调用 schema 对下一个 token 启用约束解码；当 `</tool_call>` 输出后再关闭约束解码。
 
-推理端可以实时解析 LLM 的输出，然后判断是否要对下一个 token 启用约束解码。比如推理端可以在看到 LLM 输出 `<tool_call>` 后，对接下来的 token 启用工具调用 schema，在 `</tool_call>` 后再关闭 schema。而 Agent 无法确定 LLM 是否进行工具调用，因此通常每次请求都发送工具调用 schema。
-
-以工具调用为例，一个约束解码的流程示意为
+以工具调用为例，一个 Constrained Decoding 的流程示意为
 
 ```mermaid
 sequenceDiagram
-    participant U as 用户
-    participant A as 智能体
+    participant A as Agent
     participant I as 推理端
-    participant L as 大语言模型
+    participant L as LLM
 
-    U ->> A: 提出任务
     A ->> I: 发送携带工具调用 schema 的请求
     I ->> L: 输入初始 token 序列
     L ->> I: 输出一个 token
@@ -320,10 +315,6 @@ sequenceDiagram
     Note over I,L: 离开工具调用分支
     I ->> L: 输入现有 token 序列
     L ->> I: 输出一个 token
-
-    I ->> I: 解析 token，直到结束自回归生成
-    I ->> A: 返回最终生成的文本
-    A ->> U: 显示结果
 ```
 
 #### Function Calling
@@ -339,17 +330,54 @@ sequenceDiagram
 }
 ```
 
-我们可以让另一个程序去解析这个 JSON，提取其中的 `tool` 和 `arguments` 字段，然后调用真实的 API 去获取数据。最后程序把这个数据反馈给 LLM，由 LLM 总结给用户。
+我们可以让 Agent 去解析这个 JSON，提取其中的 `tool` 和 `arguments` 字段，然后调用外部工具去获取数据。最后程序再把这个数据反馈给 LLM，由 LLM 总结给用户。
+
+以工具调用为例，一个 Function Calling 的流程示意为
+
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant A as Agent
+    participant L as LLM
+
+    U ->> A: 提出问题
+    A ->> L: 发送请求
+    L ->> A: 返回工具调用 JSON
+    A ->> A: 解析 JSON，调用外部工具获取数据
+    A ->> L: 发送数据
+    L ->> A: 返回总结的内容
+    A ->> U: 转发最终结果
+```
 
 #### ReAct
 
-<!-- TODO ReAct -->
+整体上，一个 AI Agent 被设计为 ReAct 架构：模型先进行思考，再做出行动；行动得到的结果被反馈给模型，模型由此进一步思考，并进一步行动；这种循环持续到模型不再做出行动为止。
 
-整体上，执行器被设计为 ReAct 架构，即模型先进行思考，然后做出行动；行动得到的结果被反馈给模型，模型由此进一步思考，并进一步行动；这种循环持续到模型不再做出行动为止。
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant A as Agent + LLM
+
+    U ->> A: 提出问题
+
+    Note over A: 第一轮 ReAct
+    A ->> A: 思考
+    A ->> A: 调用工具
+    A ->> A: 得到数据
+
+    Note over A: 第二轮 ReAct
+    A ->> A: 进一步思考
+    A ->> A: 进一步调用工具
+    A ->> A: 得到更多数据
+
+    Note over A: 结束 ReAct
+    A ->> A: 总结内容
+    A ->> U: 回答问题
+```
 
 #### MCP
 
-有了 Constrained Decoding 和 Function Calling 后，理论上就已经可以构建 AI Agent 了。
+有了 Constrained Decoding 和 Function Calling 后，理论上就已经可以构建一个能实现 ReAct 的 AI Agent 了。
 
 但此时又遇到了软件开发常见的 `m x n` 问题：假设有 `m` 个 Agent 应用和 `n` 个需要接入的数据系统，如果不存在标准协议，那么每个 Agent 要分别接入每个数据系统。这让开发 Agent 的人很累，做数据系统的人也很累。
 
@@ -430,15 +458,21 @@ sequenceDiagram
 }
 ```
 
-那么 Agent 解析 JSON 后，直接在本机执行 `grep -Rn TODO .`，然后把结果反馈给 LLM。这就完成了一轮 `ReAct` 循环，简单且高效。
+那么 Agent 解析 JSON 后，直接在本机执行命令
+
+```sh
+grep -Rn TODO .
+```
+
+然后 Agent 把运行结果反馈给 LLM。这就完成了一轮 ReAct 循环，简单且高效。
 
 CLI 有非常多的好处
 
 - 命令可以组合。这使得 LLM 可以在一次 Function Calling 中拿到更多信息
-- 开发更加高效。Agent 可以直接通过子进程运行指定的命令
+- 开发更加高效。Agent 可以直接通过子进程运行指定的命令，不需要在 MCP Client 和 MCP Server 间来回通信
 - 常用的开发工具通常都会提供命令行入口。这意味着 LLM 一下有了大量可以调用的工具
 
-在过去，资深开发者喜欢 CLI，因为 CLI 入口用起来很方便，适合实现自动化；现在，AI Agent 也喜欢 CLI，仍是因为 CLI 入口用起来很方便，适合本地开发的任务。可以说 CLI 正在逐渐成为人和 AI 共用的入口。
+在过去，资深开发者喜欢 CLI，因为 CLI 入口用起来很方便，适合实现自动化；现在，Coding Agent 也喜欢 CLI，还是因为 CLI 入口用起来很方便，适合本地开发的任务。可以说 CLI 正在逐渐成为人和 AI 共用的入口。
 
 ## 工具
 
