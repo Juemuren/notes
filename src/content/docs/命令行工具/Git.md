@@ -164,18 +164,12 @@ git restore --staged <file>
 git restore --staged :/
 ```
 
-暂存区可作为一个临时的备份，可以查看未暂存或已暂存的更改。也可以随时撤销未暂存的更改，恢复成已暂存的状态
+暂存区作为一个临时的备份，可以随时撤销未暂存的更改，恢复成已暂存的状态
 
 ```sh
-# 显示未暂存的更改
-git diff <file> # 单个文件
-git diff        # 整个暂存区
-# 显示已暂存的更改
-git diff --staged <file>    # 单个文件
-git diff --staged           # 整个暂存区
-# 撤销对单个文件的未暂存更改
+# 撤销单个文件的未暂存更改
 git restore path/to/file
-# 撤销所有的未暂存更改
+# 撤销所有文件的未暂存更改
 git restore :/
 ```
 
@@ -193,35 +187,93 @@ git show HEAD~3 # 前三个提交
 git diff <commit-hash> <commit-hash>
 ```
 
-Git 的提交历史可以回溯和修改
+#### 修改提交历史
 
 > [!caution] 修改历史
 > 不管是在科幻故事里还是在现实中，修改历史都是个危险的行为。
 >
 > 在决定修改公共分支的提交之前，最好先新建分支以备份，并和协作者做好沟通。
 
+回溯到之前的某个提交上
+
 ```sh
-# 回溯到之前的某个提交
 git reset HEAD~1        # 前一个提交
 git reset <commit-hash> # 指定的提交
-# 交互式地修改某个提交之后的提交历史
+```
+
+交互式地修改某个提交之后的提交历史
+
+```sh
 git rebase -i HEAD~5        # 前五个提交
 git rebase -i <commit-hash> # 指定的提交
 git rebase -i --root        # 初始提交
 ```
 
-可以把当前提交作为补丁添加到之前的某个提交上
+交互式 rebase 会打开一个文件作为待办指令清单。按照其中的说明进行修改，保存并关闭文件后就会执行这些指令。
+
+把当前提交作为补丁添加到之前的某个提交上
 
 ```sh
 git commit --fixup=<commit-hash>
 git rebase -i --autosquash <commit-hash>^
 ```
 
-rebase 编辑器打开时，Git 会自动把 `fixup!` 提交移动到目标提交之后，并标记为 `fixup`。确认没问题后直接保存退出即可
+此时 Git 会在打开的文件中自动把 `fixup!` 提交移动到目标提交之后，并标记为 `fixup`。确认没问题后直接关闭即可。
 
-### 配置差异工具
+#### 比较分支提交历史
 
-VSCode 有更易阅读 diff 视图。由于 VSCode 提供了命令行工具 [code](../编辑器/VSCode.md#命令行)，因此可以修改 `~/.gitconfig` 让 git 能够使用 VSCode 的 diff
+对比不同分支的提交
+
+```sh
+# 查询分支 main 中有但 feat 中没有的提交
+git log --oneline main..feat
+# 查询分支 feat 中有但 main 中没有的提交
+git log --oneline feat..main
+# 双向查询
+git log --oneline --left-right main...feat
+```
+
+查看包含所有分支的提交拓扑图
+
+```sh
+# 完整的图
+git log --all --graph --oneline --decorate
+# 简化的图
+git log --all --graph --oneline --decorate --simplify-by-decoration
+```
+
+### 差异
+
+#### 查看暂存差异
+
+查看未暂存的更改
+
+```sh
+git diff <file> # 单个文件
+git diff        # 所有未暂存文件
+```
+
+查看已暂存的更改
+
+```sh
+git diff --staged <file>    # 单个文件
+git diff --staged           # 所有已暂存文件
+```
+
+#### 查看分支差异
+
+查看两个分支的差异
+
+```sh
+# 显示分支 main 和 feat 的完整差异
+git diff main..feat
+# 只显示差异统计
+git diff --stat main..feat
+```
+
+#### 配置差异工具
+
+VSCode 有更易阅读的 diff 视图。由于 VSCode 提供了命令行工具 [code](../编辑器/VSCode.md#命令行)，因此可以修改 `~/.gitconfig` 让 git 能够使用 VSCode 的 diff
 
 ```ini
 [diff]
